@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  	<link rel="stylesheet" type="text/css" href="page_style.css">
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <img id="poster" src="icebroker.jpg">
+    <img id="shadow" src="shadow.png">
+    <div id="wrapper">
+    	<div id="header">
+        <div id="logo"><a href="file:../html.html">Logo</a></div>
+        <div id="menu">
+          <ul>
+            <li><a href="#">новинки</a></li>
+            <li><a href="#">жанры</a></li>
+            <li><a href="#">рекомендуем</a></li>
+          </ul>
+        </div>
+        <div id="space"></div>
+        <div id="search"><img src="search.png"></div>
+      </div>
+      <div id="name">Ледокол <p>2018 Россия 16+</p></div>
+    </div>
+    <div id="navibar">
+      
+      <div><a class="navibar" href="#discription"><img src="discription.png"></a></div>
+      <div><a class="navibar" href="#gallery"><img src="gallery.png"></a></div>
+      <div><a class="navibar" href="#info"><img src="info.png"></a></div>
+      <div id="price"><a href="#"><button>699 ₽</button> </a></div> 
+    </div>
+    
+    <span  id="discription"></span>
+    <div class="space"></div>
+    
+    <div class="content">
+      Основано на реальных событиях. 1985 год. Навстречу ледоколу «Михаил Громов» движется огромный айсберг. Уходя от столкновения с ним, судно попадает в ледовый плен и оказывается в вынужденном дрейфе вблизи побережья Антарктиды. Вокруг зловещая тишина и жуткий холод. Горючее на исходе… Нервы на пределе… И даже если можно было бы уйти — деваться все равно некуда. У командования ледокола нет права на ошибку. Одно неверное решение — и тяжелые льды раздавят судно…</div>
+      <span  id="gallery"></span>
+      <div class="content" >
+
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/39ih23cY33E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br><div class="galleryImg"><img src="Ледокол/1.jpg" ><img src="Ледокол/1.jpg"><img src="Ледокол/1.jpg"></div>
+      </div>
+      <span  id="info"></span>
+      <div class="content" >
+        Основано на реальных событиях. 1985 год. Навстречу ледоколу «Михаил Громов» движется огромный айсберг. Уходя от столкновения с ним, судно попадает в ледовый плен и оказывается в вынужденном дрейфе вблизи побережья Антарктиды. Вокруг зловещая тишина и жуткий холод. Горючее на исходе… Нервы на пределе… И даже если можно было бы уйти — деваться все равно некуда. У командования ледокола нет права на ошибку. Одно неверное решение — и тяжелые льды раздавят судно…</div>
+
+ 
+    <script type="text/javascript">
+      $("body").on('click', '[href*="#"]', function(e){
+        var fixed_offset = 100;
+        $('html,body').stop().animate({ scrollTop: $(this.hash).offset().top - fixed_offset }, 1000);
+        e.preventDefault();
+      });
+    </script>
+  </body>
+</html>

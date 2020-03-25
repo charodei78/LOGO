@@ -1,0 +1,180 @@
+body{
+	
+	color: #4a8eb8;
+	margin: 0;
+	font-size: 200%;
+
+	
+}
+#poster{
+	z-index: -3;
+	position: fixed;
+	height: 140%;
+	margin-top: -250px;
+	float: right;
+	min-height: 1200px;
+	right: 0px
+}
+#shadow{
+	min-width: 1000px;
+	z-index: -2;
+	position: fixed;
+  	height: 100% ;
+  	width: 84vw;
+}
+
+#header{
+
+	z-index: 2;
+	height: 15%;
+	width: 99vw;
+	/*border: 3px solid white;*/
+	min-height: 100px;
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+	min-width: 1000px;
+}
+
+#logo {
+	font-size: 250%;
+	flex: 1;
+	margin-left: 2%;
+	color: #4a8eb8;
+}
+#logo a{
+	color: #4a8eb8;
+}
+
+#menu ul{
+	white-space: nowrap; 
+	flex: 3;
+	
+}
+#menu li{
+	
+	font-size: 175%;
+	margin-right: 30px;
+	display: inline-block;
+	list-style-type: none;
+}
+a{text-decoration:none;}
+#menu a{
+	color: #4a8eb8
+}
+
+#search img{
+	flex: 3;
+	margin-right: 20px;
+	width:  30vw;
+	min-height:   40px;
+}
+#space{
+	flex: 1;	
+}
+#name{
+	font-size: 200%;
+	flex-wrap: wrap-reverse;
+	margin-left:5%;
+	border-bottom:  10px solid black;
+	border-bottom: 500px;
+}
+#name p{
+	color: #555555;
+	margin: -10px 0 -20px 100px;
+	font-size: 30%;
+}
+#wrapper{
+	
+	/*border: 1px solid green;*/
+	position: fixed;
+	box-shadow: -44vw 50px 20px 2px black;
+
+}
+#wrapper:before{
+	z-index: -1;
+	content: '';
+	position: absolute; top: 0; left: 0;
+	width: 56%;
+	min-width: 600px;
+	height: 100%;
+	background-color: black;
+
+}
+#navibar{
+	position: fixed;
+	margin-top: 240px;
+	display: flex;
+	flex-direction: column;	
+
+	width: 13vw;
+	
+
+}
+.navibar{
+	margin-bottom:3vh;
+	
+	text-align: top;
+	display: block;
+	margin-left: 1vw;
+	padding: 20px 0 0 20px  ;
+}
+.navibar img{
+	object-fit: contain;
+	width: 10vw;
+	max-width: 150px;
+}
+
+.navibar:hover,
+.navibar:active{
+	border-left: 2px solid yellow;
+
+
+}
+span{
+	position: absolute;
+	margin-top: -150px;
+}
+#price button{
+	background-color: #ffb65e;
+	border:none;
+	color: white;
+	padding: 1vh 1vw  ;
+	border-radius: 40px;
+	width: 7vw;
+	margin: 10vh 0 0 2vw;
+	
+	display: block;
+	position: relative;
+	font-size: 3vh;
+}
+#price button:hover{
+	background-color: #e9a656;
+}
+#price button:active{
+	background-color: #e9a656;
+	color: black;
+}
+.space{
+	height: 240px;
+
+}
+.content{
+	margin:20px 0 300px 15%;
+	min-width: 450px;
+	width: 40%;
+
+	height: 70vh;
+	/*border: 1px solid white;*/
+	
+}
+.galleryImg{
+	width: 90%;
+	border: 2px solid white;
+	padding: 10px;
+	padding-right: 0px;
+}
+.galleryImg img{
+	width: 30%; margin-right: 10px;
+}

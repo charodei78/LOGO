@@ -1,0 +1,30 @@
+#search_button, #reset_search, #reset_search img
+{
+	height: 20px;
+	margin-bottom: -6px;
+	margin-left: -45px;
+
+}
+#reset_search
+{
+	position: absolute;
+	margin-top: 12px;
+	margin-left: -25px;
+	border: none;
+	outline: none;
+	background-color: rgba(0,0,0,0);
+}
+
+
+#search_field
+{
+	border-radius: 5vh;
+	height: 40px;
+	width: 20vw;
+	background-color: rgba(32,32,32,0.90);
+	border:  solid #ffb65e ;
+	color: white;
+	outline: none;
+	padding: 0 40px 0 15px; 
+}
+
