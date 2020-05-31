@@ -5,30 +5,48 @@
   	<link rel="stylesheet" type="text/css" href="page_style.css">
     <link rel="stylesheet" type="text/css" href="search.css">
     <meta charset="utf-8">
-    <title>Preview</title>
     <?php 
-      $id = $_GET['row'];
-      $connection = new PDO('mysql:host=localhost;dbname=films_index;charset=utf8', 'root', '', $options);
-      $stmt = $connection->query('SELECT * FROM films WHERE id ='.$id[0]);
+      $id = intval($_GET['id'][0]);
+      if (!$id)
+      {
+
+      }
+      $options = array(
+        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+      );
+      try {
+        $connection = new PDO('mysql:host=localhost;dbname=films_index;charset=utf8', 'root', '', $options);
+      } catch (Exception $e) {
+       exit('<script type="text/javascript">alert("Подключение к базе данных не удалось, попробуйте перезагрузить страницу: ' . $e->getMessage().'");
+        location.href=location.href;</script>');
+      }
+      $stmt = $connection->query('SELECT * FROM film WHERE id ='.$id);
+      if (!$stmt)
+        exit('<script type="text/javascript">alert("Не удалось загрузить информацию о данном фильме, попробуйте перезагрузить страницу: ");
+        location.href=location.href;</script>');
       $data = $stmt->fetchAll()[0];
-    	$name = $data['name'];
-    	$year = $data['year'];
+      $stmt = $connection->query("SELECT name FROM genre_list  INNER JOIN genre ON genre_list.genre_id = genre.id WHERE film_id = ".$id);
+      if (!$stmt)
+        exit('<script type="text/javascript">alert("Не удалось загрузить базу жанров, попробуйте перезагрузить страницу: ");
+        location.href=location.href;</script>');
+    	$name = $data['title'];
+    	$year = explode('-', ($data['release']))[0];
     	$country = $data['country'];
     	$rate = $data['rate'];
+      $kp_link = $data['kp_link'];
     	$discription = $data['discription'];
     	$trailer = $data['trailer'];
-    	$img1 = $data['img1'];
-    	$img2 = $data['img2'];
-    	$img3 = $data['img3'];
-    	$poster = $data['poster'];
     	$price = $data['price'];
-      $genre = explode(',',$data['genre']);
+      $genre = $stmt->fetchAll();
       $role = explode(',', $data['role']);
       $director = explode(',',$data['director']);
+      $connection = null;
     ?>
+    <title><?php echo $name; ?></title>
   </head>
   <body>
-    <img id="poster" src="../srcs/images/<?php echo $name; ?>/<?php echo $poster; ?>">
+    <img id="poster" src="../srcs/images/<?php echo $id; ?>/poster">
     <img id="shadow" src="../srcs/ico/shadow.png">
     <div id="wrapper">
     	<div id="header">
@@ -40,11 +58,12 @@
             <li><a href="#">рекомендуем</a></li>
           </ul>
         </div>
-        <div id="space"></div>
-        <?php include "search.html" ?>
+        <?php include "../page/search.html" ?>
       </div>
-      </div>
-      <div id="name"> <?php echo $name; ?><p><?php echo $year; ?>г <?php echo $country; ?> <?php echo $rate ?>+</p></div>
+    </div>
+    <div id="name"><span id="title"><?php echo $name; ?></span>
+      <p><?php echo $year; ?>г <?php echo $country; ?> <?php echo $rate ?>+ <a href="http://www.kinopoisk.ru/film/<?php echo $kp_link; ?>.gif"><img style="height: 35px;" src="http://www.kinopoisk.ru/rating/<?php echo $kp_link; ?>.gif"></a></p>
+    </div>
     </div>
     <div id="navibar">
       
@@ -54,17 +73,16 @@
       <div id="price"><a href="#"><button><?php echo $price; ?> ₽</button> </a></div> 
     </div>
     <br>
-    <span  id="discription"></span>
+    <span class="anchor" id="discription"></span>
     <div class="space"></div>
-    <div class="content">
+    <div class="content" style="margin-top: 250px">
       <?php  echo $discription; ?></div>
-      <br>
-      <span  id="gallery"></span>
+      <span class="anchor"  id="gallery"></span>
       <div class="content" >
-
-        <iframe width="560" height="315" src="<?php echo $trailer ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br><div class="galleryImg"><img src="../srcs/images/<?php echo $name; ?>/<?php echo $img1; ?>" ><img src="../srcs/images/<?php echo $name; ?>/<?php echo $img2; ?>"><img src="../srcs/images/<?php echo $name; ?>/<?php echo $img3; ?>"></div>
+        <br>
+        <iframe width="100%" height="50%" src="<?php echo $trailer ?>" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br><div class="galleryImg"><img src="../srcs/images/<?php echo $id; ?>/img1" ><img src="../srcs/images/<?php echo $id; ?>/img2"><img src="../srcs/images/<?php echo $id; ?>/img3"></div>
       </div>
-      <span  id="info"></span>
+      <span class="anchor"  id="info"></span>
       <br>
       <div class="content" id="info_block">
         <div><p>В ролях </p><br>
@@ -89,7 +107,7 @@
           <p>Жарны</p> <br>
           <?php 
           foreach ($genre as $value) {
-            echo trim($value)."<br>";
+            echo trim($value['name'])."<br>";
           }
           ?>
         </div>
@@ -99,10 +117,10 @@
  
     <script type="text/javascript">
       $("body").on('click', '[href*="#"]', function(e){
-        var fixed_offset = 100;
+        var fixed_offset = 110;
         $('html,body').stop().animate({ scrollTop: $(this.hash).offset().top - fixed_offset }, 1000);
         e.preventDefault();
-      });
+      }); // TODO: пеерписать скрипт
     </script>
   </body>
 </html>

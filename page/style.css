@@ -1,0 +1,121 @@
+body
+{
+	margin: 0px;
+	background-color: #333333;
+	overflow: hidden;
+	
+}
+#sidebar_background
+{
+
+	position: fixed;
+	float: left;
+	background-color: #262626;
+	width: 15vh;
+	height: 102vh;
+}
+#logo
+{
+	color: #4a8eb8;
+	/*margin-top: 30%*/
+}
+
+#sidebar_wrapper
+{
+
+	margin-top: 10vh;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	position: absolute;
+	height: 95vh;
+	width: 15vh;
+}
+
+.sidebar 
+{
+
+	display: flex;
+	align-items: center;
+	border: 0.1px solid white;
+	height: 25%;
+	width: 100%;
+	
+}
+
+.sidebar img
+{
+	margin: 0 10%;
+	object-fit: contain;
+	width: 13vh;
+	height: 70%;
+}
+
+#content_wrapper
+{
+	position: absolute;
+	padding-left: 10px;
+	margin: 10vh 0 0 15vh;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	height: 95vh;
+	width: calc(100% - 20vh);
+}
+
+.content
+{
+	padding: 0 1% 0 1%;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: nowrap;
+	border: 0.1px solid white;
+	width: 100%;
+	height: 25%;
+	overflow: auto;
+	align-items: center;
+	scroll-behavior: smooth;
+}
+
+.content h1
+{
+	position: absolute;
+	color: white;
+	align-self: baseline;
+	margin-top: -2vmin;
+	font-size: 4vmin;
+}
+
+.content::-webkit-scrollbar
+{ 
+    width : 0;
+    height: 0;
+} 
+
+.content img
+{
+	object-fit: contain;
+	padding: 10px;
+	object-fit: contain;
+	height:  80%;
+
+}
+
+.content button
+{
+	position: absolute;
+	height: 5vmin;
+	width: 5vmin;
+	font-size: 4vmin;
+	border: none;
+	outline: none;
+	border-radius: 4vmin;
+	color: white;
+    background-color:rgba(38,38,38,0.7);;
+	justify-content: space-between;
+}
+
+.content button:active
+{
+	    background-color: rgba(64,64,64,0.7);
+}
