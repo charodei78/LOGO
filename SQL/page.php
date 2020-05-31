@@ -2,11 +2,11 @@
 <html lang="en" dir="ltr">
   <head>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  	<link rel="stylesheet" type="text/css" href="page_style.css">
+  	<link rel="stylesheet" type="text/css" href="../page/page_style.css">
     <link rel="stylesheet" type="text/css" href="search.css">
     <meta charset="utf-8">
     <?php 
-      $id = intval($_GET['id'][0]);
+      $id = intval($_GET['id']);
       if (!$id)
       {
 
@@ -58,7 +58,9 @@
             <li><a href="#">рекомендуем</a></li>
           </ul>
         </div>
-        <?php include "../page/search.html" ?>
+        <div id="search_wrapper">
+          <?php include "../srcs/modules/search.html" ?>
+        </div>
       </div>
     </div>
     <div id="name"><span id="title"><?php echo $name; ?></span>

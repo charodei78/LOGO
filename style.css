@@ -57,7 +57,7 @@ body
 	margin-top: 2vh;
 	height: 5vh;
 	min-height: 30px;
-	margin-left: 12vw;
+	margin-left: calc(150px + 3vw);
 	width: 30vw;
 }
 
@@ -111,8 +111,9 @@ body
 {
 	object-fit: contain;
 	padding: 10px;
+	margin-top: 12px;
 	object-fit: contain;
-	height:  80%;
+	height:  90%;
 
 }
 
