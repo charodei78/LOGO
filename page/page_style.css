@@ -58,6 +58,29 @@ body
 	flex-direction: row;
 	min-width: 500px;
 }
+#header_wrapper
+{
+	position: fixed;
+}
+
+#header_wrapper:before
+{
+	z-index: -1;
+	content: '';
+	position: absolute; top: 0; left: 0;
+	width: 56%;
+	min-width: 650px;
+	height: 100%;
+	background-color: black;
+	box-shadow: -10px 30px 20px 60px black;
+}
+
+#search_wrapper
+{
+	margin: 0 50px;
+	width: 25vw;
+	height: 40px;
+}
 
 #logo 
 {
@@ -125,26 +148,6 @@ iframe
 {
 	object-fit: contain;
 }
-
-
-#wrapper
-{
-	position: fixed;
-}
-
-#wrapper:before
-{
-	z-index: -1;
-	content: '';
-	position: absolute; top: 0; left: 0;
-	width: 56%;
-	min-width: 650px;
-	height: 100%;
-	background-color: black;
-	box-shadow: -10px 30px 20px 60px black;
-}
-
-
 
 #navibar
 {

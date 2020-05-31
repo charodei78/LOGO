@@ -50,6 +50,9 @@
 			<h1>Все</h1>
 		</div>
 	</div>
+	<div id="search_wrapper">
+		<?php include "search.html"; ?>
+	</div>
 	<script type="text/javascript">
 		contentList = document.getElementsByClassName('content');
 		function scrollSide (contentId, side)

@@ -44,7 +44,7 @@
   <body>
     <img id="poster" src="../srcs/images/<?php echo $id; ?>/poster">
     <img id="shadow" src="../srcs/ico/shadow.png">
-    <div id="wrapper">
+    <div id="header_wrapper">
     	<div id="header">
         <div id="logo"><a href="file:../html.html">Logo</a></div>
         <div id="menu">
@@ -54,7 +54,9 @@
             <li><a href="#">рекомендуем</a></li>
           </ul>
         </div>
-        <?php include "search.html" ?>
+        <div id="search_wrapper">
+          <?php include "search.html" ?>
+        </div>
       </div>
     </div>
     <div id="name"><span id="title"><?php echo $name; ?></span>

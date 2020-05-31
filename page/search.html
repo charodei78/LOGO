@@ -1,10 +1,12 @@
 <body>
-<link rel="stylesheet" type="text/css" href="search.css">
+<link rel="stylesheet" type="text/css" href="../page/search.css">
 <div id="search">
 <form id="search_form">
 	<input type="text" name="search_field" onkeyup="hideCross()" placeholder="Поиск" id="search_field">
-	<input type="image" formaction="search.php" src="../srcs/ico/search.gif" name="" id="search_button">
-	<button type="reset" id="reset_search" onclick="hideCross()" hidden><img  src="../srcs/ico/cross.gif"></button>
+	<div id="search_elem">
+		<input type="image" formaction="search.php" src="../srcs/ico/search.gif" name="" id="search_button">
+		<button type="reset" id="reset_search" onclick="hideCross()" hidden><img  src="../srcs/ico/cross.gif"></button>
+	</div>
 </form>
 </div>
 <script type="text/javascript">
@@ -13,6 +15,7 @@
 	var answer = document.getElementById('answer_search');
 	function getResult(request)
 	{
+		setTimeout(function() {}, 100);
 		if (!request)
 			answer.hide = true;
 		else
@@ -33,6 +36,5 @@
 			cross.hidden = true;
 		}
 	}
-	TextField.addEventListener("onchange", onchange())
 </script>
 </body>

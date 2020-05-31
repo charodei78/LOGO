@@ -1,10 +1,14 @@
 #search_button, #reset_search, #reset_search img
 {
 	height: 20px;
-	margin-bottom: -6px;
-	margin-left: -45px;
-
 }
+#reset_search, #reset_search img {margin: -5px 0 0 -40px;}
+
+#search_elem
+{
+	margin-left: -45px;
+}
+
 #reset_search
 {
 	position: absolute;
@@ -15,12 +19,20 @@
 	background-color: rgba(0,0,0,0);
 }
 
+#search_form, #search
+{
+	height: inherit;
+	width: inherit;
+	display: flex;
+	align-items: center;
+	flex-wrap: nowrap;
+}
 
 #search_field
 {
 	border-radius: 5vh;
-	height: 40px;
-	width: 20vw;
+	height: inherit;
+	width: inherit;
 	background-color: rgba(32,32,32,0.90);
 	border:  solid #ffb65e ;
 	color: white;
