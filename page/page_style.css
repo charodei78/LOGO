@@ -47,13 +47,13 @@ body
 
 #header
 {
+	display: flex;
 	z-index: 2;
 	height: 15%;
 	width: 99vw;
 	overflow-x: auto;
 	min-height: 100px;
 	align-items: center;
-	display: flex;
 	justify-content: space-between;
 	flex-direction: row;
 	min-width: 500px;
@@ -181,10 +181,7 @@ iframe
 .navibar:active
 {
 	border-left: 2px solid yellow;
-
-
 }
-
 
 .anchor 
 {
@@ -198,7 +195,7 @@ iframe
 	background-color: #ffb65e;
 	border:none;
 	color: white;
-	padding: 1vh 1vw  ;
+	padding: 1vh 0;
 	border-radius: 40px;
 	width: 7vw;
 	margin: 4vh 0 0 2vw;

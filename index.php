@@ -3,6 +3,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
 </head>
 <body>
@@ -17,10 +18,23 @@
 	<div id="content_wrapper">
 		<div class="content" id="line_1">
 			<h1>Фильмы</h1>
-			<button onclick="scrollSide(0, 0)"><</button> <button onclick="scrollSide(0, true)" style="right: -1%">></button>
 
-			<img class="preview"  onclick="location.href = 'page.html'" src="srcs/images/1/preview">
-
+			<!-- <img class="preview"  onclick="location.href = 'page?id=1'" src="srcs/images/1/preview"> -->
+			<div class="preview" style="background-image: url(srcs/images/2/preview)" onclick="location.href = 'page.html'">
+				<div class="poster_info"><h2>Аватар</h2>
+					<div class="poster_info_params">США 2016<span>1000р</span></div>
+				</div>
+			</div>
+			<div class="preview" style="background-image: url(srcs/images/1/preview)" onclick="location.href = 'page.html'">
+				<div class="poster_info"><h2>Аватар</h2>
+					<div class="poster_info_params">США 2016<span>1000р</span></div>
+				</div>
+			</div>
+			<div class="preview" style="background-image: url(srcs/images/1/preview)" onclick="location.href = 'page.html'"></div>
+			<div class="preview" style="background-image: url(srcs/images/1/preview)" onclick="location.href = 'page.html'"></div>
+			<div class="preview" style="background-image: url(srcs/images/1/preview)" onclick="location.href = 'page.html'"></div>
+			<div class="preview" style="background-image: url(srcs/images/1/preview)" onclick="location.href = 'page.html'"></div>
+<!-- 
 			<img src="srcs/images/1/preview"></a>
 			<img src="srcs/images/1/preview"></a>
 			<img src="srcs/images/1/preview"></a>
@@ -35,10 +49,11 @@
 			<img src="srcs/images/1/preview"></a>
 			<img src="srcs/images/1/preview"></a>
 			<img src="srcs/images/1/preview"></a>
-			<img src="srcs/images/1/preview"></a>
+			<img src="srcs/images/1/preview"></a> -->
 			
 			
 			
+			<button onclick="scrollSide(0, 0)" style="left: -1%"><</button> <button onclick="scrollSide(0, true)" style="right: -2%">></button>
 			
 		</div>
 		<div class="content" id="line_2"><a href="#"></a>
