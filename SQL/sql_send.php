@@ -24,7 +24,9 @@ check_img($img3);
 check_img($poster);
 check_img($preview);
 
-$connection = new PDO('mysql:host=localhost;dbname=films_index;charset=utf8', 'root', '');
+if (strstr($trailer, "https://www.youtube.com/watch?v"))
+	$trailer = substr(strrchr($trailer, '='), 1);
+$connection = new PDO('mysql:host=localhost;dbname=films_index;charset=utf8', 'root', 'root');
 if ($new_country)
 {
 	$add_new_country = $connection->prepare("INSERT INTO country (name) values (:name)");

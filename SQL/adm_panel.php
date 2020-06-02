@@ -20,7 +20,7 @@
 		PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
 		PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 		);
-		$connection = new PDO('mysql:host=localhost;dbname=films_index;charset=utf8', 'root', '', $options);
+		$connection = new PDO('mysql:host=localhost;dbname=films_index;charset=utf8', 'root', 'root', $options);
 		$stmt = $connection->query("SELECT film.id, title, `release`, country.name as country, rate, price FROM film 
 			LEFT JOIN country on film.country_id = country.id
 			ORDER BY title");
@@ -46,7 +46,7 @@
 	</table>
 	<br>
 	<input type="submit" name="create" value="Создать" formaction="create_elem.php" formmethod="get" formnovalidate="false">
-	<input type="submit" id="change_button" value="Просмотр"  formaction="page.php" formmethod="get">
+	<input type="submit" id="change_button" value="Просмотр"  formaction="/page" formmethod="get">
 	<input type="submit" id="change_button" name="change" value="Изменить" formaction="change.php" formmethod="get">
 	<input type="submit" id="delete_button" name="delete" value="Удалить" formaction="sql_delete.php" formmethod="get">
 	<script type="text/javascript">

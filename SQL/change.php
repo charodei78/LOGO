@@ -13,7 +13,7 @@
 		PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 		);
 		try {
-			$connection = new PDO('mysql:host=localhost;dbname=films_index;charset=utf8', 'root', '', $options);
+			$connection = new PDO('mysql:host=localhost;dbname=films_index;charset=utf8', 'root', 'root', $options);
 		} catch (Exception $e) {
 			exit('<script type="text/javascript">alert("Подключение к базе данных не удалось, попробуйте перезагрузить страницу: ' . $e->getMessage().'");
 				location.href=location.href;</script>');
