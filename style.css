@@ -136,19 +136,21 @@ body
 	margin-left: 10px;
 	background-repeat: no-repeat;
 	background-size: cover;
+	overflow-x:hidden
 }
 
 .preview h2
 {
-	font-size: 180%;
+	font-size: 170%;
 	margin: 0;
+	white-space: nowrap;
 }
 
 .poster_info
 {
 	visibility: hidden;
 	padding: 0 10px;
-	margin-top: 145px;
+	margin-top: 140px;
 }
 
 .poster_info_params
@@ -176,6 +178,27 @@ body
 	visibility: visible;
 }
 
+.preview:hover .marquee_1
+{
+	animation: marquee_1 3s linear infinite;
+}
+
+.preview:hover .marquee_2
+{
+	animation: marquee_2 3s linear infinite;
+}
+
+@keyframes marquee_1 {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-30%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes marquee_2 {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-60%); }
+  100% { transform: translateX(0); }
+}
 
 /*.content img
 {
