@@ -114,9 +114,11 @@ body
 	align-self: baseline;
 	margin-top: -3vmin;
 	font-size: 3vmax - 1vmin;
+	border-top: 0;
 	border-left: 5px solid #333333;
 	border-right: 8px solid #333333;
 	background-color: #333333;
+	border-radius: 60px;
 }
 
 .content::-webkit-scrollbar
@@ -136,7 +138,8 @@ body
 	margin-left: 10px;
 	background-repeat: no-repeat;
 	background-size: cover;
-	overflow-x:hidden
+	overflow-x:hidden;
+	border-radius: 5px;
 }
 
 .preview h2

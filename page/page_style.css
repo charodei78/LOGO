@@ -42,7 +42,7 @@ body
 	z-index: -2;
 	position: fixed;
   	height: 100% ;
-  	width: 84vw;
+  	width: 86vw;
 }
 
 #header
@@ -125,12 +125,13 @@ a{text-decoration:none;}
 
 #name
 {
-	width: 56%;
+	width: 54%;
 	position: fixed;
 	flex-wrap: wrap-reverse;
-	margin: 137px 0 0 40px;
+	margin: 110px 0 0 40px;
 	border-bottom:  10px solid black;
-	border-bottom: 500px;
+	background-color: black;
+	box-shadow: 0 0 10px 10px black;
 }
 
 #title {font-size: 150%;}
@@ -231,7 +232,7 @@ iframe
 
 #right_info_block
 {
-	margin-left: 25px; 
+	margin-left: 100px; 
 }
 
 #info_block p

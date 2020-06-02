@@ -7,6 +7,7 @@
 		table {border: 3px solid black}
 		td {border: 1px solid gray; padding: 5px;border-bottom: 1px solid black;border-top: 1px solid black;}
 		th {border: 1px solid black;}
+		textarea {height: 200px; width: 300px}
 	</style>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 </head>
@@ -63,7 +64,7 @@
 	</select><br>
 	Описание 			<textarea name="discription" size="256" required></textarea><br>
 	В главных ролях			<textarea name="role" required></textarea><br>
-	Режисеры			<textarea name="director" required></textarea><br>
+	Режисеры			<textarea  name="director" required></textarea><br>
 	Жанры				<select name="genre[]" size="10" multiple required>
 						<option value="none" selected disabled hidden>Жанры</option>
 						<?php 

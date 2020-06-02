@@ -52,7 +52,7 @@
 	<img id="shadow" src="../srcs/ico/shadow.png">
 	<div id="header_wrapper">
 		<div id="header">
-			<div id="logo"><a href="file:../html.html">Logo</a></div>
+			<div id="logo"><a href="/">Logo</a></div>
 			<div id="menu">
 			  	<ul>
 					<li><a href="#">новинки</a></li>
@@ -66,7 +66,7 @@
 		</div>a
 	</div>
 	<div id="name">
-		<span id="title"><?php echo $name; ?></span>
+		<div id="title"><?php echo $name; ?></div>
 		<!-- <a href="http://www.kinopoisk.ru/film/<?php echo $kp_link; ?>.gif"><img style="height: 35px;" src="http://www.kinopoisk.ru/rating/<?php echo $kp_link; ?>.gif"> </a> -->
 		<p><?php echo $year."г ".$country." ".$rate."+"?></p>
 	</div>
@@ -78,17 +78,19 @@
 		<div id="price"><a href="#"><button><?php echo $price; ?> ₽</button> </a></div> 
 	</div>
 	<br>
-	<span class="anchor" id="discription"></span>
+<div class="anchor" id="discription"></div>
 	<div class="space"></div>
 	<div class="content" style="margin-top: 250px">
 		<?php  echo $discription; ?>
 	</div>
-	<span class="anchor"  id="gallery"></span>
+<div class="anchor"  id="gallery"></div>
+	<br>
+	<br>
 	<div class="content" >
-		<br>
 		<iframe width="100%" height="50%" src="<?php echo $trailer ?>" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br><div class="galleryImg"><img src="../srcs/images/<?php echo $id; ?>/img1" ><img src="../srcs/images/<?php echo $id; ?>/img2"><img src="../srcs/images/<?php echo $id; ?>/img3"></div>
 	</div>
-	<span class="anchor"  id="info"></span>
+<div class="anchor"  id="info"></div>
+	<br>
 	<br>
 	<div class="content" id="info_block">
 		<div>
@@ -108,11 +110,11 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		$("body").on('click', '[href*="#"]', function(e){
-			var fixed_offset = 110;
-			$('html,body').stop().animate({ scrollTop: $(this.hash).offset().top - fixed_offset }, 1000);
-			e.preventDefault();
-		}); // TODO: пеерписать скрипт
+		// $("body").on('click', '[href*="#"]', function(e){
+		// 	var fixed_offset = 110;
+		// 	$('html,body').stop().animate({ scrollTop: $(this.hash).offset().top - fixed_offset }, 1000);
+		// 	e.preventDefault();
+		// }); // TODO: пеерписать скрипт
 	</script>
 </body>
 </html>
