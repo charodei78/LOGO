@@ -81,7 +81,6 @@
 							}
 						 ?>
 						</select><br>
-	Кинопоиск id 			<input type="number" name="kp_link" required><br>
 	Ссылка на трейлер 		<input type="url" name="trailer" required><br>
 	Первое изображение 		<input type="file" name="img1" ><br>
 	Второе изображение 		<input type="file" name="img2" ><br>

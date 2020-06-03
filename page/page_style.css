@@ -1,6 +1,7 @@
 body
 {
 	color: #4a8eb8;
+	background-color: black;
 	margin: 0;
 	font-size: 200%;
 }
@@ -134,8 +135,6 @@ a{text-decoration:none;}
 	box-shadow: 0 0 10px 10px black;
 }
 
-#title {font-size: 150%;}
-
 #name p
 {
 	color: #cfd1cd;
@@ -145,6 +144,8 @@ a{text-decoration:none;}
 
 }
 
+#title {font-size: 150%;}
+
 iframe
 {
 	object-fit: contain;
@@ -153,7 +154,7 @@ iframe
 #navibar
 {
 	position: fixed;
-	margin-top: 260px;
+	margin-top: 230px;
 	display: flex;
 	flex-direction: column;	
 	width: 13vw;
@@ -162,12 +163,12 @@ iframe
 
 .navibar
 {
-	margin-bottom:3vh;
+	margin-bottom:2vh;
 	min-width: 100px;
 	text-align: top;
 	display: block;
 	margin-left: 1vw;
-	padding: 20px 0 0 20px  ;
+	padding: 20px 0 0 20px;
 }
 
 .navibar img
@@ -242,20 +243,32 @@ iframe
 	margin-bottom: -8%;
 }
 
-.galleryImg
+#galleryImg
 {
 	display: flex;
+	flex-shrink: 0;
+	display: flex;
 	align-items: center;
-	height: 20vh;
+	height: 23%;
 	width: 100%;
 	padding-right: 0px;
 }
 
-.galleryImg img
+iframe
 {
 	box-shadow: 0 0 10px 2px gray;
-	width: 31%; 
-	height: 100%;
-	margin-left: 10px;
-	object-fit: contain;
+	border-radius: 10px;
 }
+
+.galleryImg
+{
+	overflow: hidden;
+	height: 100%;
+	margin-left: 8px;
+	width: 32%;
+	border-radius: 5px;
+	box-shadow: 0 0 10px 2px gray;
+	background-position: center;
+	background-size: cover;
+}
+

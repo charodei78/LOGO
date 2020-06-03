@@ -7,7 +7,7 @@ function check_img($file)
 			exit("<script type='text/javascript'>alert('Недопустимый формат файла! - ".$file['name'].':'.$type."')</script>");
 	$type = $file['type']; 
 	$size = $file['size']; 
-	if (($type != "image/jpg") && ($type != "image/jpeg") && ($type != "image/gif") && ($type != "image/png"))
+	if (($type != "image/jpg") && ($type != "image/jpeg") && ($type != "image/gif") && ($type != "image/webp") && ($type != "image/png"))
 		exit("<script type='text/javascript'>alert('Недопустимый формат файла! - ".$file['name'].':'.$type."')</script>");
 	if ($size > 1024000)
 		exit("<script type='text/javascript'>alert('Превышен размер файла! - ".$file['name'].':'.$size."')</script>");

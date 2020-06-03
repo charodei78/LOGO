@@ -9,7 +9,6 @@ $role = $_POST['role'];
 $director = $_POST['director'];
 $genre = array_map(intval, $_POST['genre']);
 $category = $_POST['category'];
-$kp_link = $_POST['kp_link'];
 $trailer = $_POST['trailer'];
 $img1 = $_FILES['img1'];
 $img2 = $_FILES['img2'];
@@ -33,9 +32,9 @@ if ($new_country)
 	$add_new_country->execute([':name' => $new_country]);
 	$country = $connection->lastInsertId();
 }
-$sql = "INSERT INTO film(title, `release`, country_id, rate, discription, trailer, price,role ,director, kp_link) VALUES (:title, :release, :country, :rate, :discription, :trailer, :price,:role ,:director, :kp_link)";
+$sql = "INSERT INTO film(title, `release`, country_id, rate, discription, trailer, price,role ,director) VALUES (:title, :release, :country, :rate, :discription, :trailer, :price,:role ,:director)";
 $query = $connection->prepare($sql);
-$query->execute([':title'=>$title, 'release'=>$release, 'country'=>$country, 'rate'=>$rate, 'discription'=>$discription, 'trailer'=>$trailer, 'price'=>$price,'role'=>$role ,'director'=>$director, 'kp_link'=>$kp_link]);
+$query->execute([':title'=>$title, 'release'=>$release, 'country'=>$country, 'rate'=>$rate, 'discription'=>$discription, 'trailer'=>$trailer, 'price'=>$price,'role'=>$role ,'director'=>$director]);
 $last_id = $connection->lastInsertId();
 if (!is_dir('../srcs/images/'.$last_id))
 {

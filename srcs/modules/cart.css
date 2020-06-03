@@ -1,0 +1,95 @@
+@font-face
+{
+	src: url(../fonts/Oldkharkiv.otf); /* Путь к файлу со шрифтом */
+}
+
+#wrapper
+{
+	box-shadow: 0 0 10px 3px white;
+	margin: 0;
+	color: white;
+	padding: 10px 0;
+	border-radius: 10px;
+	background-color: rgba(38,38,38, 0.9);
+	width: 430px;
+	display: flex;
+	/*align-self:  center;*/
+	/*justify-content: space-around;*/
+}
+
+#product_list
+{
+	max-height: 410px;
+	overflow: auto;
+	padding-right: 20px; 
+}
+
+::-webkit-scrollbar {
+	width: 12px;
+}
+ 
+::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+	border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+#table_form table
+{
+	margin-left: 10px;
+	width: 410px;
+}
+
+th
+{
+	padding-bottom: 10px;
+	border-bottom:  1px solid black;
+	text-align: center;
+	font-size: 145%;
+	padding: 5px;
+	/*border: 1px solid white;*/
+}
+
+td 
+{
+	height: 30px;
+	text-align: center;
+	border-top: 1px solid white;
+	/*border: 1px solid white;*/
+	padding: 5px;
+}
+
+#close_button
+{
+	position: absolute;
+	margin-left: 400px;
+	/*right: 5px;*/
+	/*top: 5px;*/
+	color: white;
+	border-radius: 30px;
+	width: 20px;
+	height: 20px;
+	background-color: red;
+	border: none;
+	outline: none;
+}
+
+
+.button
+{
+	background-color: white;
+	border-radius: 7px;
+	color: white;
+	padding: 6px;
+	border: none;
+	box-shadow: 0 0 2px 2px white, inset 0 0 1px 1px white;
+}
+
+.button:disabled
+{
+	background-color: #333333;
+}

@@ -12,7 +12,6 @@
 	$category = $_POST['category'];
 	$director = $_POST['director'];
 	$genre = $_POST['genre'];
-	$kp_link = $_POST['kp_link'];
 	$img1 = $_FILES['img1'];
 	$img2 = $_FILES['img2'];
 	$img3 = $_FILES['img3'];
@@ -53,9 +52,9 @@
 	insert_list($genre, $id, $connection, "genre_list", "film_id", "genre_id");
 	$connection->query("DELETE FROM category_list WHERE film_id = $id");
 	insert_list($category, $id, $connection, "category_list", "film_id", "category_id");
-	$sql = "UPDATE film SET title = :title, `release` = :release, country_id = :country_id, rate = :rate, discription = :discription, role = :role, director = :director, trailer = :trailer, price = :price, kp_link = :kp_link WHERE id = :id";
+	$sql = "UPDATE film SET title = :title, `release` = :release, country_id = :country_id, rate = :rate, discription = :discription, role = :role, director = :director, trailer = :trailer, price = :price WHERE id = :id";
 	$query = $connection->prepare($sql);
-	$query->execute([':title' => $title, ':release' => $release, ':country_id' => $country, ':rate' => $rate, ':discription' => $discription, ':role' => $role, ':director' => $director, ':trailer' => $trailer, ':price' => $price, ':kp_link' => $kp_link, ':id' => $id]);
+	$query->execute([':title' => $title, ':release' => $release, ':country_id' => $country, ':rate' => $rate, ':discription' => $discription, ':role' => $role, ':director' => $director, ':trailer' => $trailer, ':price' => $price, ':id' => $id]);
 	function replase_img($img, $name)
 	{
 		if($img['name'])

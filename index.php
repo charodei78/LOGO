@@ -34,7 +34,7 @@
 												LEFT JOIN category ON category.id = category_id 
 												LEFT JOIN film ON film.id = film_id
 												LEFT JOIN country ON film.country_id = country.id
-												ORDER BY category
+												ORDER BY category.id
 												');
 		if (!$stmt)
 			exit('<script type="text/javascript">alert("Не удалось загрузить информацию о данном фильме, попробуйте перезагрузить страницу: ");
@@ -69,42 +69,19 @@
 			}
 		}
 		?>
-		<!-- <h1>Фильмы</h1>
-
-		<div class="preview" style="background-image: url(srcs/images/2/preview)" onclick="location.href = 'page.html'">
-			<div class="poster_info"><h2>Аватар</h2>
-				<div class="poster_info_params">США 2016<span>1000р</span></div>
-			</div>
-		</div>
-		<div class="preview" style="background-image: url(srcs/images/1/preview)" onclick="location.href = 'page.html'">
-			<div class="poster_info"><h2>Аватар</h2>
-				<div class="poster_info_params">США 2016<span>1000р</span></div>
-			</div>
-		</div> -->
-<!-- 
-
-			<div class="preview" style="background-image: url(srcs/images/2/preview)" onclick="location.href = 'page.html'">
-				<div class="poster_info"><h2>Аватар</h2>
-					<div class="poster_info_params">США 2016<span>1000р</span></div>
-				</div>
-			</div>
-			<button onclick="scrollSide(0, 0)" style="left: -1%"><</button> <button onclick="scrollSide(0, true)" style="right: -2%">></button>
-		</div>
- -->
-		<!-- <div class="content" id="line_2"><a href="#"></a>
-			<h1>Сериалы</h1>
-		</div>
-		<div class="content" id="line_3"><a href="#"></a>
-			<h1>Новинки</h1>
-		</div>
-		<div class="content" id="line_4"><a href="#"></a>
-			<h1>Все</h1>
-		</div> -->
 	</div>
 	<div id="search_wrapper">
 		<?php include "srcs/modules/search.html"; ?>
 	</div>
+		<iframe scrolling="no"  id="cart" src="/srcs/modules/cart.php" width="448" height="10" align="center">
+		Ваш браузер не поддерживает плавающие фреймы! Используйте актуальную версию браузера!
+	</iframe>
+
+	<button id="cart_button"  onclick="showCart()">Корзина</button>
+
+
 	<script type="text/javascript">
+		
 		contentList = document.getElementsByClassName('content');
 		function scrollSide (contentId, side)
 		{
@@ -112,7 +89,22 @@
 				contentList[contentId].scrollLeft += 350;
 			else
 				contentList[contentId].scrollLeft -= 350;
+		}
 
+		function showCart()
+		{
+
+			cart.src = cart.src;
+			cart.style.visibility = 'visible';
+			setTimeout('cart.height = parseInt(window.frames[0].height) + 45;cart.style.opacity = 1; cart.style.margin = "calc((100vh - " + window.frames[0].height + ") / 2) 36vw";', 500); 				
+		}
+
+		function closeCart()
+		{
+			cart.style.opacity = 0;
+			cart.style.visibility = 'hidden';
+			cart.style.marginTop = 0;
+			setTimeout('cart.height = 10 ', 500); 
 		}
 	</script>
 </body>

@@ -81,7 +81,6 @@
 									}
 								?>
 							</select><br>
-		Кинопоиск id 			<input type="number" value="<?php echo $pre_params['kp_link']; ?>" name="kp_link" required>
 		Ссылка на трейлер 		<input name="trailer" value="<?php echo $pre_params['trailer']; ?>" required>
 		Первое изображение 		<input type="file" name="img1" >
 		Второе изображение 		<input type="file" name="img2" >

@@ -5,9 +5,11 @@
 	<link rel="stylesheet" type="text/css" href="/page/page_style.css">
 	<meta charset="utf-8">
 	<?php
-	$id = intval($_GET['id']);
+	$id = $_GET['id'];
 	if (is_array($id))
-		$id = id[0];
+		$id = intval($id[0]);
+	else
+		$id = intval($id);
 	$options = array(
 						PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
 						PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
@@ -21,7 +23,7 @@
 	   exit('<script type="text/javascript">alert("Подключение к базе данных не удалось, попробуйте перезагрузить страницу: ' . $e->getMessage().'");
 		location.href=location.href;</script>');
 	}
-	$stmt = $connection->query("SELECT film.id, title, `release`, rate, discription, trailer, director, `role`, kp_link, price, 
+	$stmt = $connection->query("SELECT film.id, title, `release`, rate, discription, trailer, director, `role`, price, 
 		country.name as country FROM film LEFT JOIN country ON country_id = country.id WHERE film.id =".$id);
 	if (!$stmt)
 		exit('<script type="text/javascript">alert("Не удалось загрузить информацию о данном фильме, попробуйте перезагрузить страницу: ");
@@ -75,7 +77,7 @@
 		<div><a class="navibar" href="#discription"><img src="../srcs/ico/discription.png"></a></div>
 		<div><a class="navibar" href="#gallery"><img src="../srcs/ico/gallery.png"></a></div>
 		<div><a class="navibar" href="#info"><img src="../srcs/ico/info.png"></a></div>
-		<div id="price"><a href="#"><button><?php echo $price; ?> ₽</button> </a></div> 
+		<div id="price"><button onclick="addToCart(<?php echo $id; ?>)"><?php echo $price; ?> ₽</button></div> 
 	</div>
 	<br>
 <div class="anchor" id="discription"></div>
@@ -84,10 +86,13 @@
 		<?php  echo $discription; ?>
 	</div>
 <div class="anchor"  id="gallery"></div>
-	<br>
-	<br>
 	<div class="content" >
-		<iframe width="100%" height="50%" src="<?php echo $trailer ?>" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br><div class="galleryImg"><img src="../srcs/images/<?php echo $id; ?>/img1" ><img src="../srcs/images/<?php echo $id; ?>/img2"><img src="../srcs/images/<?php echo $id; ?>/img3"></div>
+		<iframe width="100%" height="50%" src="<?php echo $trailer ?>" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br>
+		<div id="galleryImg">
+			<div class="galleryImg" style="background-image: url(../srcs/images/<?php echo $id; ?>/img1)"></div>
+			<div class="galleryImg" style="background-image: url(../srcs/images/<?php echo $id; ?>/img2)"></div>
+			<div class="galleryImg" style="background-image: url(../srcs/images/<?php echo $id; ?>/img3)"></div>
+		</div>
 	</div>
 <div class="anchor"  id="info"></div>
 	<br>
@@ -110,11 +115,46 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		// $("body").on('click', '[href*="#"]', function(e){
-		// 	var fixed_offset = 110;
-		// 	$('html,body').stop().animate({ scrollTop: $(this.hash).offset().top - fixed_offset }, 1000);
-		// 	e.preventDefault();
-		// }); // TODO: пеерписать скрипт
+		$("body").on('click', '[href*="#"]', function(e){
+			var fixed_offset = 110;
+			$('html,body').stop().animate({ scrollTop: $(this.hash).offset().top - fixed_offset }, 800);
+			e.preventDefault();
+		}); // TODO: пеерписать скрипт
+		function addToCart(params)
+		{
+			var tmpCart = getCookie("cart");
+			if (tmpCart)
+			{
+				var cartList = getCookie("cart").split(',').map(Number);
+				for (var i = cartList.length - 1; i >= 0; i--) 
+				{
+					if (cartList[i] == Number(params))
+						return false;
+				}
+				document.cookie = "cart = " + getCookie("cart") + ", " + Number(params) + ";path=/";
+				return;
+			}
+			document.cookie = "cart = " + getCookie("cart") + Number(params) + ";path=/";
+			// recount();
+		}
+
+		function getCookie(name) 
+		{
+		  var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
+		  return matches ? decodeURIComponent(matches[1]) : '';
+		}
+
+		
+
+		function delete_cookie ( cookie_name )
+		{
+			if (confirm("Удалить товар из корзины?"))
+			{
+				var cookie_date = new Date ();
+				cookie_date.setTime ( cookie_date.getTime() - 1 );
+				document.cookie = cookie_name += "=; expires=" + cookie_date.toGMTString();
+			}
+		}
 	</script>
 </body>
 </html>
