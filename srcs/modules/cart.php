@@ -3,7 +3,6 @@
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="cart.css">
-	<title></title>
 </head>
 <body>
 <?php 
@@ -30,10 +29,10 @@ else
 			<tr><th>✓<th>id<th style="padding: 0 15px;">Имя<th width='100px;'>Цена<th width='30px;'>
 		</table>
 		<div id="product_list">
-		<table cellspacing="0">
 			<?php  
 			if ($product_list)
 			{
+				echo "<table cellspacing='0'>";
 				foreach ($product_list as $row) {
 					echo '<tr><td  width="56px" style="padding: 0;"><input style="width: 22px;" class="checkboxes" name="id[]" type="checkbox" value="'.$row['id'].'" >';
 					foreach ($row as $col => $value) {		
@@ -50,26 +49,51 @@ else
 							echo "<td width='134px'>".$value;
 
 					}
-					echo "<td width='30px;'><button onclick='delete_cookie($tmp_id)' style='color: red; background-color: rgba(0,0,0,0); border: 0; outline: none; font-size:130%;'> X </button>";
+					echo "<td width='30px;'><button type='button' onclick='rmCartProduct($tmp_id)' style='color: red; background-color: rgba(0,0,0,0); border: 0; outline: none; font-size:130%;'> X </button>";
 				}
+				echo "</table>";
 			}
 			else
-				echo "<pre style='font-size: 150%; margin:0 10px'><br>Товары отсутствуют</pre>";
+				echo "<p style='font-size: 150%; margin-left: 15px;'>Товары отсутствуют</p>";
 			?>
-		</table>
 		</div>
 	</form>
 </div>
 <script type="text/javascript">
 	var wrapper = document.getElementById("wrapper");
 	var height = window.getComputedStyle(wrapper, null).height;
-	function delete_cookie ( cookie_name )
+	function getCookie(name) 
+	{
+	  var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
+	  return matches ? decodeURIComponent(matches[1]) : '';
+	}
+
+	function deleteCookie (cookie_name)
+	{
+		var cookie_date = new Date ();
+		cookie_date.setTime ( cookie_date.getTime() - 1 );
+		document.cookie = cookie_name += "=; expires=" + cookie_date.toGMTString();
+		location.href=location.href;
+	}
+	function rmCartProduct (id)
 	{
 		if (confirm("Удалить товар из корзины?"))
 		{
-			var cookie_date = new Date ();
-			cookie_date.setTime ( cookie_date.getTime() - 1 );
-			document.cookie = cookie_name += "=; expires=" + cookie_date.toGMTString();
+			var res = (getCookie("cart").split(','));
+			var index = -1;
+			for (var i = res.length - 1; i >= 0; i--) 
+			{
+				if (parseInt(res[i]) == parseInt(id))
+					{
+						index = i;
+						break;
+					}
+			}
+			if (index < 0)
+				return false;
+			res.splice(index, 1);
+			document.cookie = "cart = " + res.join(',') + ";path=/";
+			window.parent.recount();
 			location.href=location.href;
 		}
 	}

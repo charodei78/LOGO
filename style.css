@@ -85,24 +85,9 @@ body
 #cart_button
 {
 	position: absolute;
-	height: 5vmin;
-	width: 10vmin;
-	right: 60px;
-	top: 20px;
-}
-
-#cart
-{
-	position: absolute;
-	transition: 0.4s;
-	margin-left: 36vw; /*не убирать!*/
-	position: fixed;
-	visibility:hidden;
-	opacity: 0;
-	z-index: 1;
-	border-radius: 20px;
-	border: none;
-	outline: none;
+	height: 50px;
+	right: 80px;
+	top: 5px;
 }
 
 #content_wrapper

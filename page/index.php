@@ -135,25 +135,12 @@
 				return;
 			}
 			document.cookie = "cart = " + getCookie("cart") + Number(params) + ";path=/";
-			// recount();
 		}
 
 		function getCookie(name) 
 		{
 		  var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
 		  return matches ? decodeURIComponent(matches[1]) : '';
-		}
-
-		
-
-		function delete_cookie ( cookie_name )
-		{
-			if (confirm("Удалить товар из корзины?"))
-			{
-				var cookie_date = new Date ();
-				cookie_date.setTime ( cookie_date.getTime() - 1 );
-				document.cookie = cookie_name += "=; expires=" + cookie_date.toGMTString();
-			}
 		}
 	</script>
 </body>

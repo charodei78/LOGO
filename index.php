@@ -73,15 +73,11 @@
 	<div id="search_wrapper">
 		<?php include "srcs/modules/search.html"; ?>
 	</div>
-		<iframe scrolling="no"  id="cart" src="/srcs/modules/cart.php" width="448" height="10" align="center">
-		Ваш браузер не поддерживает плавающие фреймы! Используйте актуальную версию браузера!
-	</iframe>
-
-	<button id="cart_button"  onclick="showCart()">Корзина</button>
+	<?php include "srcs/modules/cart_button.php" ?>
 
 
 	<script type="text/javascript">
-		
+		recount();
 		contentList = document.getElementsByClassName('content');
 		function scrollSide (contentId, side)
 		{
@@ -89,22 +85,6 @@
 				contentList[contentId].scrollLeft += 350;
 			else
 				contentList[contentId].scrollLeft -= 350;
-		}
-
-		function showCart()
-		{
-
-			cart.src = cart.src;
-			cart.style.visibility = 'visible';
-			setTimeout('cart.height = parseInt(window.frames[0].height) + 45;cart.style.opacity = 1; cart.style.margin = "calc((100vh - " + window.frames[0].height + ") / 2) 36vw";', 500); 				
-		}
-
-		function closeCart()
-		{
-			cart.style.opacity = 0;
-			cart.style.visibility = 'hidden';
-			cart.style.marginTop = 0;
-			setTimeout('cart.height = 10 ', 500); 
 		}
 	</script>
 </body>
