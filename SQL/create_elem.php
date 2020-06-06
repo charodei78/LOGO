@@ -82,9 +82,7 @@
 						 ?>
 						</select><br>
 	Ссылка на трейлер 		<input type="url" name="trailer" required><br>
-	Первое изображение 		<input type="file" name="img1" ><br>
-	Второе изображение 		<input type="file" name="img2" ><br>
-	Третье изображение 		<input type="file" name="img3" ><br>
+	Скринготы	 		<input type="file" name="img[]" multiple accept="image/*" ><br>
 	Постер 				<input type="file" name="poster" ><br>
 	Превью 				<input type="file" name="preview" ><br>
 	Цена 				<input type="number" min="0" name="price" required><br>

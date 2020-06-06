@@ -38,9 +38,14 @@
 		$rate = $_POST['rate'];
 		$discription = $_POST['discription'];
 		$trailer = $_POST['trailer'];
-		$img1 = $_FILES['img1'];
-		$img2 = $_FILES['img2'];
-		$img3 = $_FILES['img3'];
+		$img1 = array();
+		$img2 = array();
+		$img3 = array();
+		foreach ($_FILES['img'] as $key => $value) {
+			$img1[$key] = $value[0];
+			$img2[$key] = $value[1];
+			$img3[$key] = $value[2];
+		}
 		$poster = $_FILES['poster'];
 		$preview = $_FILES['preview'];
 		$price = $_POST['price'];
@@ -63,7 +68,7 @@
 	<title><?php echo $name; ?></title>
 </head>
 <body>
-	<img id="poster" src="../srcs/images/<?php echo $id; ?>/poster">
+	<img id="poster" src="../srcs/images/tmp/poster">
 	<img id="shadow" src="../srcs/ico/shadow.png">
 	<div id="header_wrapper">
 		<div id="header">
@@ -104,9 +109,9 @@
 	<div class="content" >
 		<iframe width="100%" height="50%" src="<?php echo $trailer ?>" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br>
 		<div id="galleryImg">
-			<div class="galleryImg" style="background-image: url(../srcs/images/<?php echo $id; ?>/img1)"></div>
-			<div class="galleryImg" style="background-image: url(../srcs/images/<?php echo $id; ?>/img2)"></div>
-			<div class="galleryImg" style="background-image: url(../srcs/images/<?php echo $id; ?>/img3)"></div>
+			<div class="galleryImg" style="background-image: url(../srcs/images/tmp/img1)"></div>
+			<div class="galleryImg" style="background-image: url(../srcs/images/tmp/img2)"></div>
+			<div class="galleryImg" style="background-image: url(../srcs/images/tmp/img3)"></div>
 		</div>
 	</div>
 <div class="anchor"  id="info"></div>

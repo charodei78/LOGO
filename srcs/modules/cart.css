@@ -1,8 +1,3 @@
-@font-face
-{
-	src: url(../fonts/Oldkharkiv.otf); /* Путь к файлу со шрифтом */
-}
-
 #wrapper
 {
 	box-shadow: 0 0 10px 3px white;

@@ -19,7 +19,8 @@
 	{
 		position: absolute;
 		transition: 0.4s;
-		margin-left: 36vw; /*не убирать!*/
+		/*margin-left: 36vw;*/ /*не убирать!*/
+		right: 70px;
 		position: fixed;
 		visibility:hidden;
 		opacity: 0;
@@ -59,6 +60,11 @@
 
 	function showCart()
 	{
+		if (cart.style.visibility == "visible")
+		{
+			closeCart();
+			return ;
+		}
 		cart.src = cart.src;
 		cart.style.visibility = 'visible';
 		setTimeout('cart.height = parseInt(window.frames[0].height) + 45;cart.style.opacity = 1; cart.style.margin = "calc((100vh - " + window.frames[0].height + ") / 2) 36vw";', 500); 				
@@ -68,7 +74,7 @@
 	{
 		cart.style.opacity = 0;
 		cart.style.visibility = 'hidden';
-		cart.style.marginTop = 0;
+		cart.style.margin = 0;
 		setTimeout('cart.height = 10 ', 500); 
 	}
 </script>
