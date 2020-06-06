@@ -11,7 +11,7 @@
 	else
 		$id = intval($id);
 	if (!$id)
-		exit('<script type="text/javascript">location.href="/404.html";</script>');
+		exit('<script type="text/javascript">location.href="/404";</script>');
 	$options = array(
 						PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
 						PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
