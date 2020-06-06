@@ -7,7 +7,6 @@
 	border-radius: 10px;
 	background-color: rgba(38,38,38, 0.9);
 	width: 430px;
-	display: flex;
 	/*align-self:  center;*/
 	/*justify-content: space-around;*/
 }
@@ -74,17 +73,19 @@ td
 }
 
 
-.button
+#buy_button
 {
-	background-color: white;
+	background-color: green;
 	border-radius: 7px;
 	color: white;
-	padding: 6px;
+	font-weight: bold;
+	padding: 10px;
 	border: none;
-	box-shadow: 0 0 2px 2px white, inset 0 0 1px 1px white;
+	margin-left: 80%;
+	/*box-shadow: 0 0 2px 2px white, inset 0 0 1px 1px white;*/
 }
 
-.button:disabled
+#buy_button:disabled
 {
 	background-color: #333333;
 }

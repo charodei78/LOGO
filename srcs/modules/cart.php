@@ -24,6 +24,7 @@ else
 ?>
 <div id="wrapper">
 	<button id="close_button" onclick="window.parent.closeCart()">x</button>
+	<h1 style="margin: -5px 15px 3px">Библиотека</h1>
 	<form id="table_form">
 		<table cellspacing="0">
 			<tr><th>✓<th>id<th style="padding: 0 15px;">Имя<th width='100px;'>Цена<th width='30px;'>
@@ -34,7 +35,7 @@ else
 			{
 				echo "<table cellspacing='0'>";
 				foreach ($product_list as $row) {
-					echo '<tr><td  width="56px" style="padding: 0;"><input style="width: 22px;" class="checkboxes" name="id[]" type="checkbox" value="'.$row['id'].'" >';
+					echo '<tr><td  width="56px" style="padding: 0;"><input style="width: 22px;" onchange="isChecked()" class="checkboxes" name="id[]" type="checkbox" value="'.$row['id'].'" >';
 					foreach ($row as $col => $value) {		
 						if ($col == 'id')
 						{
@@ -54,12 +55,14 @@ else
 				echo "</table>";
 			}
 			else
-				echo "<p style='font-size: 150%; margin-left: 15px;'>Товары отсутствуют</p>";
+				echo "<p style='font-size: 150%; margin:0; margin-left: 15px;'>Товары отсутствуют</p>";
 			?>
 		</div>
+		<button id="buy_button">Купить</button>
 	</form>
 </div>
 <script type="text/javascript">
+	isChecked();
 	var wrapper = document.getElementById("wrapper");
 	var height = window.getComputedStyle(wrapper, null).height;
 	function getCookie(name) 
@@ -68,27 +71,26 @@ else
 	  return matches ? decodeURIComponent(matches[1]) : '';
 	}
 
-	function deleteCookie (cookie_name)
+	function isChecked()
 	{
-		var cookie_date = new Date ();
-		cookie_date.setTime ( cookie_date.getTime() - 1 );
-		document.cookie = cookie_name += "=; expires=" + cookie_date.toGMTString();
-		location.href=location.href;
+		var checkboxes = document.getElementsByClassName('checkboxes');
+		for (var i = checkboxes.length - 1; i >= 0; i--)
+		{
+			if (checkboxes[i].checked)
+			{
+				buy_button.removeAttribute('disabled');
+				return;
+			}
+		}
+		buy_button.disabled = true;
 	}
+
 	function rmCartProduct (id)
 	{
-		if (confirm("Удалить товар из корзины?"))
+		if (confirm("Удалить товар из библиотеки?"))
 		{
-			var res = (getCookie("cart").split(','));
-			var index = -1;
-			for (var i = res.length - 1; i >= 0; i--) 
-			{
-				if (parseInt(res[i]) == parseInt(id))
-					{
-						index = i;
-						break;
-					}
-			}
+			var res = (getCookie("cart").split(',').map(Number));
+			var index = res.indexOf(parseInt(id));
 			if (index < 0)
 				return false;
 			res.splice(index, 1);

@@ -111,7 +111,7 @@
 		}
 		else
 		{
-			echo "<div class='content' style='flex-wrap: wrap; height: auto;justify-content: space-around; padding: 10px 30px;'>
+			echo "<div class='content' style='flex-wrap: wrap; height: auto;justify-content: space-around;'>
 				<h1>".$genre_list[$genre - 1]['name']."</h1>";
 			for ($i=0; $i < count($data); $i++) 
 			{

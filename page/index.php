@@ -10,6 +10,8 @@
 		$id = intval($id[0]);
 	else
 		$id = intval($id);
+	if (!$id)
+		exit('<script type="text/javascript">location.href="/404.html";</script>');
 	$options = array(
 						PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
 						PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
@@ -77,7 +79,7 @@
 		<div><a class="navibar" href="#discription"><img src="../srcs/ico/discription.png"></a></div>
 		<div><a class="navibar" href="#gallery"><img src="../srcs/ico/gallery.png"></a></div>
 		<div><a class="navibar" href="#info"><img src="../srcs/ico/info.png"></a></div>
-		<div id="price"><button onclick="addToCart(<?php echo $id; ?>)"><?php echo $price; ?> ₽</button></div> 
+		<div id="price"><button id="price_button" onclick="addToCart(<?php echo $id; ?>)"><?php echo $price; ?> ₽</button></div> 
 	</div>
 	<br>
 <div class="anchor" id="discription"></div>
@@ -115,33 +117,65 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+
+		var price_tmp = price_button.innerHTML;
+		checkCart(<?php echo $id; ?>);
+
 		$("body").on('click', '[href*="#"]', function(e){
 			var fixed_offset = 110;
 			$('html,body').stop().animate({ scrollTop: $(this.hash).offset().top - fixed_offset }, 800);
 			e.preventDefault();
 		}); // TODO: пеерписать скрипт
-		function addToCart(params)
-		{
-			var tmpCart = getCookie("cart");
-			if (tmpCart)
-			{
-				var cartList = getCookie("cart").split(',').map(Number);
-				for (var i = cartList.length - 1; i >= 0; i--) 
-				{
-					if (cartList[i] == Number(params))
-						return false;
-				}
-				document.cookie = "cart = " + getCookie("cart") + ", " + Number(params) + ";path=/";
-				return;
-			}
-			document.cookie = "cart = " + getCookie("cart") + Number(params) + ";path=/";
-		}
 
 		function getCookie(name) 
 		{
 		  var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
 		  return matches ? decodeURIComponent(matches[1]) : '';
 		}
+
+		function checkCart(id)
+		{
+			var cartList = getCookie("cart").split(',').map(Number);
+			if (cartList.indexOf(Number(id)) != -1)
+			{
+				price_button.onclick = function () {rmCartProduct(id)}
+				price_button.style.backgroundColor = 'red';
+				price_button.innerHTML = "Убрать";
+				return true;
+			}
+			else
+			{
+				price_button.onclick = function () {addToCart(id)}
+				price_button.style.backgroundColor = '#ffb65e';
+				price_button.innerHTML = price_tmp;
+				return false;
+			}
+		}
+
+		function addToCart(id)
+		{
+			var cartList = getCookie("cart").split(',').map(Number);
+			if (checkCart(id))
+					return;
+			if (cartList[0] == 0)
+				cartList[0] = id;
+			else
+				cartList[cartList.length] = id;
+			document.cookie = "cart = " + cartList + ";path=/";
+			checkCart(id);
+		}
+
+		function rmCartProduct(id)
+		{
+			var res = (getCookie("cart").split(',').map(Number));
+			var index = res.indexOf(parseInt(id));
+			if (index < 0)
+				return false;
+			res.splice(index, 1);
+			document.cookie = "cart = " + res.join(',') + ";path=/";
+			checkCart(id);
+		}
+
 	</script>
 </body>
 </html>

@@ -31,6 +31,7 @@ body
 	z-index: -3;
 	position: fixed;
 	min-height: 100vh;
+	min-width: 45%;
 	width: 90vmin; 
 	object-fit: contain;
 	right: 0px;
@@ -206,6 +207,11 @@ iframe
 	display: block;
 	position: relative;
 	font-size: 3vh;
+}
+
+#price button:disabled
+{
+	background-color: gray;
 }
 
 #price button:hover {background-color: #e9a656;}

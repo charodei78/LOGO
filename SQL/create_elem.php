@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<title>Create</title>
 	<style type="text/css">
+		.centr {display: flex; align-items: center;margin-left: 60px;}
 		table {border: 3px solid black}
 		td {border: 1px solid gray; padding: 5px;border-bottom: 1px solid black;border-top: 1px solid black;}
 		th {border: 1px solid black;}
@@ -62,25 +63,25 @@
 		<option value="16">16+</option>
 		<option value="18">18+</option>
 	</select><br>
-	Описание 			<textarea name="discription" size="256" required></textarea><br>
-	В главных ролях			<textarea name="role" required></textarea><br>
-	Режисеры			<textarea  name="director" required></textarea><br>
-	Жанры				<select name="genre[]" size="10" multiple required>
+	<div class="centr">Описание 			<textarea name="discription" size="256" required></textarea><br></div>
+	<div class="centr">В главных ролях			<textarea name="role" required></textarea><br></div>
+	<div class="centr">Режисеры			<textarea  name="director" required></textarea><br></div>
+	<div class="centr">Жанры				<select name="genre[]" size="10" multiple required>
 						<option value="none" selected disabled hidden>Жанры</option>
 						<?php 
 							for ($i=0; $i < count($genre_list); $i++) { 
 								echo "<option value='".$genre_list[$i]['id']."'>".$genre_list[$i]['genre']."</option>";
 							}
 						 ?>
-						</select><br>
-	Категории			<select name="category[]" size="10" multiple required>
+						</select></div><br>
+	<div class="centr">Категории			<select name="category[]" size="10" multiple required>
 						<option value="none" selected disabled hidden>Категории</option>
 						<?php 
 							for ($i=0; $i < count($category_list); $i++) { 
 								echo "<option value='".$category_list[$i]['id']."'>".$category_list[$i]['category']."</option>";
 							}
 						 ?>
-						</select><br>
+						</select></div><br>
 	Ссылка на трейлер 		<input type="url" name="trailer" required><br>
 	Скринготы	 		<input type="file" name="img[]" multiple accept="image/*" ><br>
 	Постер 				<input type="file" name="poster" ><br>
