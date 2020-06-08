@@ -31,6 +31,8 @@
 		exit('<script type="text/javascript">alert("Не удалось загрузить информацию о данном фильме, попробуйте перезагрузить страницу: ");
 		location.href=location.href;</script>');
 	$data = $stmt->fetchAll()[0];
+	if ($data == array())
+		exit('<script type="text/javascript">location.href="/404";</script>');
 	$stmt = $connection->query("SELECT name FROM genre_list LEFT JOIN genre ON genre_id = genre.id WHERE film_id =".$id);
 	if (!$stmt)
 		exit('<script type="text/javascript">alert("Не удалось загрузить базу жанров, попробуйте перезагрузить страницу: ");

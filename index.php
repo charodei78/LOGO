@@ -26,12 +26,12 @@
 			exit('<script type="text/javascript">alert("Не удалось загрузить информацию о странах, попробуйте перезагрузить страницу: ");
 			</script>');
 	$country_list = $stmt->fetchAll();
-	$stmt = $connection->query('SELECT * FROM category');
+	$stmt = $connection->query('SELECT id, name FROM category');
 	if (!$stmt)
 			exit('<script type="text/javascript">alert("Не удалось загрузить информацию о категориях, попробуйте перезагрузить страницу: ");
 			</script>');
 	$category_list = $stmt->fetchAll();
-	$stmt = $connection->query('SELECT * FROM genre');
+	$stmt = $connection->query('SELECT id, name FROM genre INNER JOIN genre_list ON genre_id = id GROUP BY id');
 	if (!$stmt)
 			exit('<script type="text/javascript">alert("Не удалось загрузить информацию о жанрах, попробуйте перезагрузить страницу: ");
 			</script>');
@@ -50,43 +50,81 @@
 		<?php
 		$category = intval($_GET['category']);
 		$genre = intval($_GET['genre']);
-		if ($category)
+		$price_min = intval($_GET['price_min']);
+		$price_max = intval($_GET['price_max']);
+		$release_min = intval($_GET['release_min']);
+		$release_max = intval($_GET['release_max']);
+		$country = intval($_GET['country']);
+		$rate = intval($_GET['rate']);
+		if ($category && $genre)
 		{
-			$stmt = $connection->query('SELECT film.id as id, title, genre.name as category, country.name as country, `release`, price  FROM genre_list
+			$prequery = 'SELECT film.id as id, title, genre.name as category, country.name as country, `release`, price  FROM genre_list
 												LEFT JOIN genre ON genre.id = genre_id 
 												LEFT JOIN film ON film.id = film_id
 												LEFT JOIN country ON film.country_id = country.id
 												LEFT JOIN category_list ON category_list.film_id = film.id
 												WHERE category_list.category_id = '.$category.'
-												ORDER BY genre.id
-												');
+												AND `genre_list`.genre_id = '.$genre.'' ;
+		}
+		elseif ($category)
+		{
+			$prequery = 'SELECT film.id as id, title, genre.name as category, country.name as country, `release`, price  FROM genre_list
+												LEFT JOIN genre ON genre.id = genre_id 
+												LEFT JOIN film ON film.id = film_id
+												LEFT JOIN country ON film.country_id = country.id
+												LEFT JOIN category_list ON category_list.film_id = film.id
+												WHERE category_list.category_id = '.$category.'
+												';
 		}
 		elseif ($genre)
 		{
-			$stmt = $connection->query('SELECT film.id as id, title, country.name as country, `release`, price  FROM genre_list
+			$prequery = 'SELECT film.id as id, title, country.name as country, `release`, price  FROM genre_list
 												LEFT JOIN genre ON genre.id = genre_id 
 												LEFT JOIN film ON film.id = film_id
 												LEFT JOIN country ON film.country_id = country.id
 												WHERE `genre_list`.genre_id = '.$genre.'
-												ORDER BY genre.id
-												');
+												';
 		}
 		else
 		{
-			$stmt = $connection->query('SELECT film.id as id, title, category.name as category, country.name as country, `release`, price  FROM category_list
+			$prequery = 'SELECT film.id as id, title, category.name as category, country.name as country, `release`, price  FROM category_list
 												LEFT JOIN category ON category.id = category_id 
 												LEFT JOIN film ON film.id = film_id
 												LEFT JOIN country ON film.country_id = country.id
-												ORDER BY category.id
-												');
+												WHERE film.id > 0';
 		}
+		
+		if ($price_min)
+			$prequery = $prequery." AND `price` >".$price_min;
+		if ($price_max)
+			$prequery = $prequery." AND `price` <".$price_max;
+		if ($release_min)
+			$prequery = $prequery." AND `release` >".$release_min;
+		if ($release_max)
+			$prequery = $prequery." AND `release` <".$release_max;
+		if ($country)
+			$prequery = $prequery." AND country_id = ".$country;
+		if ($rate)
+			$prequery = $prequery." AND rate >= ".$rate;
+		if ($category && !$genre)
+			$prequery = $prequery." ORDER BY genre.id";
+		elseif (!$genre) 
+			$prequery = $prequery." ORDER BY category.id";
+		echo $prequery;
+		$stmt = $connection->query($prequery);
 		if (!$stmt)
 			exit('<script type="text/javascript">alert("Не удалось загрузить информацию о товарах, попробуйте перезагрузить страницу: ");
 			location.href=location.href;</script>');
 		$data = $stmt->fetchAll();
+		
 		$category_tmp = "";
 		$line_tmp = 0;
-		if (!$genre)
+		if ($data == array())
+		{
+			echo "<div class='content' style='flex-wrap: wrap; height: auto;justify-content: space-around;'>
+				<h1 style='text-transform: none'>Ничего не найдено</h1>";
+		}
+		elseif (!$genre)
 		{
 			for ($i=0; $i < count($data); $i++) 
 			{ 
@@ -118,7 +156,7 @@
 		else
 		{
 			echo "<div class='content' style='flex-wrap: wrap; height: auto;justify-content: space-around;'>
-				<h1>".$genre_list[$genre - 1]['name']."</h1>";
+				<h1 id='conten_title'></h1>";
 			for ($i=0; $i < count($data); $i++) 
 			{
 				echo '<div class="preview" style="background-image: url(srcs/images/'.$data[$i]['id'].'/preview)" onclick="location.href = `/page?id='.$data[$i]['id'].'`">
@@ -161,17 +199,17 @@
 	</div>
 	<div id="filter_menu" class="side_menu">
 		<form action="/">
-		<br><h1>Фильтры</h1>
+		<br><h1 style="margin-top: 0">Фильтры</h1>
 		<div class="filter_menu">
 			Цена
 			<div>
 				<div>
 					<h4 class="from_to_title">от</h4>
-					<input type="number" min="0" max="999" name="price_min">
+					<input type="number" value="<?php echo $price_min ? $price_min : '' ?>" min="0" max="9999" name="price_min">
 				</div>
 				<div>
 					<h4 class="from_to_title">до</h4>
-					<input type="number" min="0" max="999" name="price_max">
+					<input type="number" value="<?php echo $price_max ? $price_max : '' ?>" min="0" max="9999" name="price_max">
 				</div>
 			</div>
 		</div>
@@ -180,19 +218,19 @@
 			<div>
 				<div>
 					<h4 class="from_to_title">от</h4>
-					<input type="number" min="0" max="999" name="price_min">
+					<input type="number" value="<?php echo $release_min ? $release_min : '' ?>" min="1950" max="2020" name="release_min">
 				</div>
 				<div>
 					<h4 class="from_to_title">до</h4>
-					<input type="number" min="0" max="999" name="price_max">
+					<input type="number" value="<?php echo $release_max ? $release_max : '' ?>" min="1950" max="2020" name="release_max">
 				</div>
 			</div>
 		</div>
 		<div class="filter_menu">
 			Страна
 			<div>
-				<select name="country" size="1" id="country_selector" required>
-					<option value="none" selected disabled hidden>Страна</option>
+				<select name="country" size="1" id="country_selector">
+					<option value="none" selected style="background-color: black">Страна</option>
 						<?php 
 							for ($i=0; $i < count($country_list); $i++) { 
 								echo "<option value='".$country_list[$i]['id']."'>".$country_list[$i]['country']."</option>";
@@ -204,8 +242,8 @@
 		<div class="filter_menu">
 			Возрастной рейтинг
 			<div>
-				<select name="rate" size="1" required>
-					<option value="none" selected disabled hidden>
+				<select name="rate" size="1">
+					<option value="none" style="background-color: black" selected>
 					Выберите </option> 
 					<option value="0">0+</option>
 					<option value="3">3+</option>
@@ -216,11 +254,76 @@
 				</select>
 			</div>
 		</div>
+		<div class="filter_menu">
+			Жанр
+			<div>
+				<select name="genre" size="1" id="genre_selector">
+					<option value="none" selected style="background-color: black">Жанр</option>
+					<?php foreach ($genre_list as $value) 
+					{
+						echo "<option value='".$value['id']."'>".$value['name']."</option>";
+					} 
+					 ?>
+				</select>
+			</div>
+		</div>
+		<div class="filter_menu">
+			Категория
+			<div>
+				<select name="category" size="1">
+					<option value="none" selected style="background-color: black">Категория </option>
+					<?php foreach ($category_list as $value) 
+					{
+						echo "<option value='".$value['id']."'>".$value['name']."</option>";
+					} 
+					 ?>
+				</select>
+			</div>
+		</div>
+		<button type="reset" style="left: 25px">Сбросить</button>
+		<button>Применить</button>
 		</form>
 	</div>
 	<script type="text/javascript">
 		filter_menu.style.visibility = 'hidden';
 		category_menu.style.visibility = 'hidden';
+		var country = <?php echo $country; ?>;
+		var rate = <?php echo $rate; ?>;
+		var genre = <?php echo $genre; ?>;
+		var category = <?php echo $category; ?>;
+		var selectors = document.getElementsByTagName("select");
+
+		for (var i = 0; i < selectors.length; i++)
+		{
+			for (var j = 0; j < selectors[i].children.length; j++)
+			{
+				if (selectors[i].name == "country" && selectors[i].children[j].value == country)
+				{
+					selectors[i].children[j].selected = true;
+					break ;
+				}
+				if (selectors[i].name == "rate" && selectors[i].children[j].value == rate)
+				{
+					selectors[i].children[j].selected = true;
+					break ;
+				}
+				if (selectors[i].name == "genre" && selectors[i].children[j].value == genre)
+				{
+					selectors[i].children[j].selected = true;
+						if (document.getElementById('conten_title'))
+							conten_title.innerHTML = selectors[i].children[j].innerHTML;
+					break ;
+				}
+				// alert(selectors[i].name)
+				if (selectors[i].name == "category" && selectors[i].children[j].value == category)
+				{
+					selectors[i].children[j].selected = true;
+					break ;
+				}
+			}
+		}
+
+
 		recount();
 		contentList = document.getElementsByClassName('content');
 		function scrollSide (contentId, side)
