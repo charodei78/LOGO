@@ -21,6 +21,11 @@
 		exit('<script type="text/javascript">alert("Подключение к базе данных не удалось, попробуйте перезагрузить страницу: ' . $e->getMessage().'");
 		location.href=location.href;</script>');
 	}
+	$stmt = $connection->query("SELECT id, name as country FROM country ORDER BY country;");
+	if (!$stmt)
+			exit('<script type="text/javascript">alert("Не удалось загрузить информацию о странах, попробуйте перезагрузить страницу: ");
+			</script>');
+	$country_list = $stmt->fetchAll();
 	$stmt = $connection->query('SELECT * FROM category');
 	if (!$stmt)
 			exit('<script type="text/javascript">alert("Не удалось загрузить информацию о категориях, попробуйте перезагрузить страницу: ");
@@ -34,10 +39,11 @@
 	?>
 	<div id="sidebar_background">
 		<div id="sidebar_wrapper">
-			<div class="sidebar"><a href="?category=2"><img src="srcs/ico/films.png"></a></div>
-			<div class="sidebar"><a href="?category=3"><img src="srcs/ico/serials.png"></a></div>
-			<div class="sidebar"><a href="?category=1"><img src="srcs/ico/new.png"></a></div>
-			<div class="sidebar" onclick="category_menu.style.visibility == 'hidden' ? category_menu.style.visibility = 'visible' : category_menu.style.visibility = 'hidden'"><img src="srcs/ico/categories.png"></div>
+			<div class="sidebar"><img onclick="location.href = '/?category=2'" src="srcs/ico/films.png"></a></div>
+			<div class="sidebar"><img onclick="location.href = '/?category=3'" src="srcs/ico/serials.png"></a></div>
+			<div class="sidebar"><img onclick="location.href = '/?category=1'" src="srcs/ico/new.png"></a></div>
+			<div class="sidebar" onclick="filter_menu.style.visibility = 'hidden'; category_menu.style.visibility == 'hidden' ? category_menu.style.visibility = 'visible' : category_menu.style.visibility = 'hidden'"><img src="srcs/ico/categories.png"></div>
+			<div class="sidebar" onclick="category_menu.style.visibility = 'hidden';filter_menu.style.visibility == 'hidden' ? filter_menu.style.visibility = 'visible' : filter_menu.style.visibility = 'hidden'"><img src="srcs/ico/filter.png"></div>
 		</div>
 	</div>
 	<div id="content_wrapper">
@@ -135,7 +141,7 @@
 		<?php include "srcs/modules/search.html"; ?>
 	</div>
 	<?php include "srcs/modules/cart_button.php" ?>
-	<div id="category_menu">
+	<div id="category_menu" class="side_menu">
 		<ul>
 			<p>Жанры</p>
 			<?php foreach ($genre_list as $value) 
@@ -152,8 +158,68 @@
 			} 
 			 ?>
 		</ul>
+	</div>
+	<div id="filter_menu" class="side_menu">
+		<form action="/">
+		<br><h1>Фильтры</h1>
+		<div class="filter_menu">
+			Цена
+			<div>
+				<div>
+					<h4 class="from_to_title">от</h4>
+					<input type="number" min="0" max="999" name="price_min">
+				</div>
+				<div>
+					<h4 class="from_to_title">до</h4>
+					<input type="number" min="0" max="999" name="price_max">
+				</div>
+			</div>
 		</div>
+		<div class="filter_menu">
+			Год
+			<div>
+				<div>
+					<h4 class="from_to_title">от</h4>
+					<input type="number" min="0" max="999" name="price_min">
+				</div>
+				<div>
+					<h4 class="from_to_title">до</h4>
+					<input type="number" min="0" max="999" name="price_max">
+				</div>
+			</div>
+		</div>
+		<div class="filter_menu">
+			Страна
+			<div>
+				<select name="country" size="1" id="country_selector" required>
+					<option value="none" selected disabled hidden>Страна</option>
+						<?php 
+							for ($i=0; $i < count($country_list); $i++) { 
+								echo "<option value='".$country_list[$i]['id']."'>".$country_list[$i]['country']."</option>";
+							}
+						 ?>
+					</select>
+			</div>
+		</div>
+		<div class="filter_menu">
+			Возрастной рейтинг
+			<div>
+				<select name="rate" size="1" required>
+					<option value="none" selected disabled hidden>
+					Выберите </option> 
+					<option value="0">0+</option>
+					<option value="3">3+</option>
+					<option value="7">7+</option>
+					<option value="12">12+</option>
+					<option value="16">16+</option>
+					<option value="18">18+</option>
+				</select>
+			</div>
+		</div>
+		</form>
+	</div>
 	<script type="text/javascript">
+		filter_menu.style.visibility = 'hidden';
 		category_menu.style.visibility = 'hidden';
 		recount();
 		contentList = document.getElementsByClassName('content');

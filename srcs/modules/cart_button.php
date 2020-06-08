@@ -13,7 +13,7 @@
 		height: 45%;
 		width: 18%;
 		right: 0;
-		top: 5%;
+		top: 7%;
 	}
 	#cart
 	{

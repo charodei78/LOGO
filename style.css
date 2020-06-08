@@ -56,7 +56,8 @@ body
 	align-items: center;
 	justify-content: space-around;
 	/*border: 0.1px solid white;*/
-	height: 8vw;
+	height: 7vw;
+	max-height: 18%;
 	width: 90%;
 	/*border: px solid #c9914d;
 	border-bottom: 2px solid #c9914d;
@@ -73,7 +74,7 @@ body
 	height: 70%;
 }
 
-#category_menu
+.side_menu
 {
 	position: fixed;
 	display: flex;
@@ -84,11 +85,49 @@ body
 	box-shadow: 0 0 10px 3px gray;
 	border-radius: 20px;
 	left: 10%;
-	top: 5vh;
-	height: 90vh;
-	color: white;
-	width: 410px;
 	padding: 5px;
+	color: white;
+}
+
+#filter_menu
+{
+	padding: 10px 30px;
+	bottom: 5vh;
+	height: 300px;
+	font-size: 125%;
+	width: 350px;	
+}
+
+.filter_menu
+{
+	margin-top: 20px;
+	display: flex;
+	justify-content: space-between;
+	width: inherit;
+}
+
+.filter_menu div
+{
+	display: flex; justify-content: space-between;
+}
+
+#filter_menu form
+{
+	width: 100%;
+}
+
+.from_to_title
+{
+	margin: 0 5px;
+	top: 0;
+}
+
+
+#category_menu
+{
+	height: 90vh;
+	top: 5vh;
+	width: 410px;
 }
 
 #category_menu a
@@ -132,8 +171,8 @@ body
 #cart_button
 {
 	position: fixed;
-	height: 50px;
-	right: 80px;
+	height: 60px;
+	right: 100px;
 	top: 5px;
 }
 

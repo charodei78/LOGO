@@ -45,7 +45,8 @@ body
 	z-index: -2;
 	position: fixed;
   	height: 100% ;
-  	width: 86vw;
+  	width: 100%;
+  	box-shadow: inset 67vw 30px 87px -44px black, inset 900px 30px 87px 0 black;
 }
 
 #header
@@ -206,6 +207,7 @@ iframe
 	min-width: 120px;
 	display: block;
 	position: relative;
+	outline: none;
 	font-size: 3vh;
 }
 

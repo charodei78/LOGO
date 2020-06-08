@@ -53,7 +53,8 @@
 </head>
 <body>
 	<img id="poster" src="../srcs/images/<?php echo $id; ?>/poster">
-	<img id="shadow" src="../srcs/ico/shadow.png">
+	<!-- <img id="shadow" src="../srcs/ico/shadow.png"> -->
+	<div id="shadow"></div>
 	<div id="header_wrapper">
 		<div id="header">
 			<div id="logo"><a href="/">Logo</a></div>
@@ -139,7 +140,7 @@
 			if (cartList.indexOf(Number(id)) != -1)
 			{
 				price_button.onclick = function () {rmCartProduct(id)}
-				price_button.style.backgroundColor = 'red';
+				price_button.style.backgroundColor = '#ff4d00';
 				price_button.innerHTML = "Убрать";
 				return true;
 			}
