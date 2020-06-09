@@ -110,7 +110,6 @@
 			$prequery = $prequery." ORDER BY genre.id";
 		elseif (!$genre) 
 			$prequery = $prequery." ORDER BY category.id";
-		echo $prequery;
 		$stmt = $connection->query($prequery);
 		if (!$stmt)
 			exit('<script type="text/javascript">alert("Не удалось загрузить информацию о товарах, попробуйте перезагрузить страницу: ");
@@ -198,7 +197,7 @@
 		</ul>
 	</div>
 	<div id="filter_menu" class="side_menu">
-		<form action="/">
+		<form action="/" onreset="clearElemValue('#filter_menu input')">
 		<br><h1 style="margin-top: 0">Фильтры</h1>
 		<div class="filter_menu">
 			Цена
@@ -242,8 +241,9 @@
 		<div class="filter_menu">
 			Возрастной рейтинг
 			<div>
+				<h4 class="from_to_title">от</h4>
 				<select name="rate" size="1">
-					<option value="none" style="background-color: black" selected>
+					<option value="" style="background-color: black" selected>
 					Выберите </option> 
 					<option value="0">0+</option>
 					<option value="3">3+</option>
@@ -281,10 +281,12 @@
 			</div>
 		</div>
 		<button type="reset" style="left: 25px">Сбросить</button>
-		<button>Применить</button>
+		<button onclick="disableEmptyField()">Применить</button>
 		</form>
 	</div>
 	<script type="text/javascript">
+		recount();
+
 		filter_menu.style.visibility = 'hidden';
 		category_menu.style.visibility = 'hidden';
 		var country = <?php echo $country; ?>;
@@ -314,7 +316,6 @@
 							conten_title.innerHTML = selectors[i].children[j].innerHTML;
 					break ;
 				}
-				// alert(selectors[i].name)
 				if (selectors[i].name == "category" && selectors[i].children[j].value == category)
 				{
 					selectors[i].children[j].selected = true;
@@ -323,8 +324,30 @@
 			}
 		}
 
+		function clearElemValue(selectorName)
+		{
+			var elements = document.querySelectorAll(selectorName);
+			for (var i = elements.length - 1; i >= 0; i--)
+			{
+				elements[i].removeAttribute("value");
+			}
+		}
 
-		recount();
+		function disableEmptyField()
+		{
+			var fields = document.querySelectorAll("#filter_menu input");
+			for (var i = fields.length - 1; i >= 0; i--)
+			{
+				if (!fields[i].value)
+					fields[i].removeAttribute("name");
+			}
+			for (var i = selectors.length - 1; i >= 0; i--)
+			{
+				if (!selectors[i].value || selectors[i].value == 'none')
+					selectors[i].removeAttribute("name");
+			}
+		}
+
 		contentList = document.getElementsByClassName('content');
 		function scrollSide (contentId, side)
 		{

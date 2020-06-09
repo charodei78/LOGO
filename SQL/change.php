@@ -45,7 +45,7 @@
 		<form enctype = 'multipart/form-data'>
 		id				<input type="text" readonly="true" name="id" value="<?php echo $id; ?>">
 		Название 			<input type="text" name="title" value="<?php echo $pre_params['title']; ?>" required>
-		Год 				<input type="date" name="release" value="<?php echo $pre_params['release']; ?>" required>
+		Год 				<input type="date" min="1950" max="2020"  name="release" value="<?php echo $pre_params['release']; ?>" required>
 		Страна 				<select name="country" size="1" id="country_selector" required>
 							<option value="none" selected disabled hidden>Страна</option>
 							<?php 

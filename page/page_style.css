@@ -3,7 +3,6 @@ body
 	color: #4a8eb8;
 	background-color: black;
 	margin: 0;
-	font-size: 200%;
 }
 
 ::-webkit-scrollbar
@@ -54,12 +53,11 @@ body
 	display: flex;
 	z-index: 2;
 	height: 15%;
-	width: 99vw;
+	width: 50vw;
 	overflow-x: auto;
+	font-size: 150%;
 	min-height: 100px;
 	align-items: center;
-	justify-content: space-between;
-	flex-direction: row;
 	min-width: 500px;
 }
 #header_wrapper
@@ -72,16 +70,20 @@ body
 	z-index: -1;
 	content: '';
 	position: absolute; top: 0; left: 0;
-	width: 56%;
+	width: 110%;
 	min-width: 650px;
 	height: 100%;
 	background-color: black;
-	box-shadow: -10px 30px 20px 60px black;
+	box-shadow: -10px 30px 30px 60px black;
 }
 
 #search_wrapper
 {
-	margin: 0 50px;
+	position: fixed;
+	z-index: 1;
+	right: 150px;
+	top: 35px;
+	margin: 0 50px 0 70vh;
 	width: 25vw;
 	height: 40px;
 }
@@ -101,7 +103,6 @@ body
 
 #menu ul
 {
-	white-space: nowrap; 
 	flex: 3;
 	
 }
@@ -132,10 +133,10 @@ a{text-decoration:none;}
 	width: 54%;
 	position: fixed;
 	flex-wrap: wrap-reverse;
-	margin: 110px 0 0 40px;
+	margin: 130px 0 0 40px;
 	border-bottom:  10px solid black;
 	background-color: black;
-	box-shadow: 0 0 10px 10px black;
+	box-shadow: 0 30px 10px 10px black;
 }
 
 #name p
@@ -143,11 +144,11 @@ a{text-decoration:none;}
 	color: #cfd1cd;
 	padding-top: 	0.5%;
 	margin: -5px 0 -20px 10px;
-	font-size: 50%;
+	font-size: 100%;
 
 }
 
-#title {font-size: 150%;}
+#title {font-size: 200%;}
 
 iframe
 {
@@ -229,6 +230,7 @@ iframe
 	margin:20px 0 300px calc(200px + (40px - 1vw));
 	min-width: 450px;
 	width: 40%;
+	font-size: 160%;
 	height: 70vh;
 	/*border: 1px solid white;*/
 }
@@ -236,13 +238,15 @@ iframe
 #info_block
 {
 	height: 40vh;
+	padding-left: 50px; 
 	display: flex;
-	font-size: 70%;
+	font-size: 130%;
+	
 }
 
 #right_info_block
 {
-	margin-left: 100px; 
+	margin-left: 200px; 
 }
 
 #info_block p

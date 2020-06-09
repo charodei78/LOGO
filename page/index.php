@@ -54,6 +54,9 @@
 	<title><?php echo $name; ?></title>
 </head>
 <body>
+	<div id="search_wrapper">
+			  <?php include "../srcs/modules/search.html" ?>
+	</div>
 	<img id="poster" src="../srcs/images/<?php echo $id; ?>/poster">
 	<!-- <img id="shadow" src="../srcs/ico/shadow.png"> -->
 	<div id="shadow"></div>
@@ -67,10 +70,7 @@
 					<li><a href="#">рекомендуем</a></li>
 				</ul>
 			</div>
-			<sdiv id="search_wrapper">
-			  <?php include "../srcs/modules/search.html" ?>
-			</div>
-		</div>a
+		</div>
 	</div>
 	<div id="name">
 		<div id="title"><?php echo $name; ?></div>
@@ -87,8 +87,8 @@
 	<br>
 <div class="anchor" id="discription"></div>
 	<div class="space"></div>
-	<div class="content" style="margin-top: 250px">
-		<?php  echo $discription; ?>
+	<div class="content" style="margin-top: 250px;">
+		<span style="vertical-align: middle;"><?php  echo $discription; ?></span>
 	</div>
 <div class="anchor"  id="gallery"></div>
 	<div class="content" >

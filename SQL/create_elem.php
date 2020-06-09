@@ -44,7 +44,7 @@
 <form method="post" enctype = 'multipart/form-data'>
 <pre>
 	Название 			<input type="text" name="title" required><br>
-	Дата выхода 			<input type="date" name="release" required><br>
+	Дата выхода 		<input type="date" min="1950" max="2020"  name="release" required>
 	Страна 				<select name="country" size="1" id="country_selector" required>
 						<option value="none" selected disabled hidden>Страна</option>
 							<?php 

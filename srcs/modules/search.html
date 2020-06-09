@@ -1,13 +1,29 @@
 <body>
 <link rel="stylesheet" type="text/css" href="/srcs/modules/search.css">
 <div id="search">
-<form id="search_form">
-	<input type="text" name="search_field" onkeyup="hideCross()" placeholder="Поиск" id="search_field">
-	<div id="search_elem">
-		<input type="image" formaction="search.php" src="/srcs/ico/search.gif" name="" id="search_button">
-		<button type="reset" id="reset_search" onclick="hideCross()" hidden><img  src="/srcs/ico/cross.gif"></button>
+	<div style="position: relative; height: 0; width: 0;">
+		<div id="result">
+			<div class="results">
+				<img src="/srcs/images/1/preview">
+				<div class="search_title">Ледокол</div>
+				<div class="search_info">Россия 2016 16+ </div>
+				<div class="search_price">800р</div>
+			</div>
+			<div class="results">
+				<img src="/srcs/images/2/preview">
+				<div class="search_title">Аватар. Легенда о голом мужике-инвалиде</div>
+				<div class="search_info">США 2009 16+ </div>
+				<div class="search_price">800р</div>
+			</div>
+		</div>
 	</div>
-</form>
+	<form id="search_form">
+		<input type="text" name="search_field" onkeyup="hideCross()" placeholder="Поиск" id="search_field">
+		<div id="search_elem">
+			<input type="image" formaction="search.php" src="/srcs/ico/search.gif" name="" id="search_button">
+			<button type="reset" id="reset_search" onclick="hideCross()" hidden><img  src="/srcs/ico/cross.gif"></button>
+		</div>
+	</form>
 </div>
 <script type="text/javascript">
 	var TextField = document.getElementById('search_field');
