@@ -54,6 +54,7 @@
 	border-radius: 20px;
 	width: inherit;
 	width: 30vw;
+	padding: 10px;
 	min-width: 350px;
 	min-height: 100px;
 	box-shadow: 0 0 10px 3px grey;
@@ -71,14 +72,19 @@
 {
 	display: grid;
 	grid-template-columns: 180px auto 70px;
-	grid-template-rows: auto 30px;
+	grid-template-rows: auto auto;
 	grid-template-areas:
 		"preview title title"
 		"preview info price";
 	color: white;
-	margin: 10px 0;
 	padding: 10px;
 	box-shadow: 0 -10px 5px -10px gray;
+}
+
+.results:hover
+{
+	background-color: rgba(200,200,200, 0.2);
+	border-radius: 10px;
 }
 
 #result div:nth-child(1)
@@ -100,6 +106,7 @@
 
 .search_info
 {
+	margin-top: auto;
 	color: gray;
 	font-size: 130%;
 	grid-area: info;
@@ -107,6 +114,8 @@
 
 .search_price
 {
+	margin-top: auto;
+	margin-left: 5px;
 	color: gray;
 	font-size: 130%;
 	grid-area: price;
