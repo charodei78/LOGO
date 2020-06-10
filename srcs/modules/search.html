@@ -63,6 +63,7 @@
 	{
 		var block = document.createElement("div");
 		block.className = "results";
+		block.onclick = function(){location.href = "/page/?id=" + elem.id}
 		var preview = document.createElement("img");
 		var title = document.createElement("div");
 		title.className = "search_title";
