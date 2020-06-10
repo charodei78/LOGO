@@ -2,55 +2,87 @@
 <link rel="stylesheet" type="text/css" href="/srcs/modules/search.css">
 <div id="search">
 	<div style="position: relative; height: 0; width: 0;">
-		<div id="result">
-			<div class="results">
-				<img src="/srcs/images/1/preview">
-				<div class="search_title">Ледокол</div>
-				<div class="search_info">Россия 2016 16+ </div>
-				<div class="search_price">800р</div>
-			</div>
-			<div class="results">
-				<img src="/srcs/images/2/preview">
-				<div class="search_title">Аватар. Легенда о голом мужике-инвалиде</div>
-				<div class="search_info">США 2009 16+ </div>
-				<div class="search_price">800р</div>
-			</div>
+		<div id="result" style="visibility: hidden">
 		</div>
 	</div>
-	<form id="search_form">
-		<input type="text" name="search_field" onkeyup="hideCross()" placeholder="Поиск" id="search_field">
+	<form id="search_form" onreset="reset_search.hidden = true">
+		<input type="text" name="search_field" onkeyup="hideCross();getSearchResult(this.value)" placeholder="Поиск" id="search_field">
 		<div id="search_elem">
-			<input type="image" formaction="search.php" src="/srcs/ico/search.gif" name="" id="search_button">
-			<button type="reset" id="reset_search" onclick="hideCross()" hidden><img  src="/srcs/ico/cross.gif"></button>
+			<button type="button" onclick="getSearchResult(search_field.value)" id="search_button"><img src="/srcs/ico/search.gif"></button>
+			<button type="reset" id="reset_search" onclick="clearResults()" hidden><img  src="/srcs/ico/cross.gif"></button>
 		</div>
 	</form>
 </div>
 <script type="text/javascript">
 	var TextField = document.getElementById('search_field');
 	var cross = document.getElementById('reset_search');
-	var answer = document.getElementById('answer_search');
-	function getResult(request)
-	{
-		setTimeout(function() {}, 100);
-		if (!request)
-			answer.hide = true;
-		else
-		{
-			answer.hide = false;
-			
-		}
-	}
+
 	function hideCross()
 	{
 		if (TextField.value.length > 0)
 		{
 			cross.hidden = false;
-			getResult(TextField.value)
 		}
 		else
 		{
 			cross.hidden = true;
 		}
+	}
+	function getSearchResult(searchQuery)
+	{
+		if (!searchQuery)
+		{
+			result.style.visibility = 'hidden';
+			return ;
+		}
+		const request = new XMLHttpRequest();
+		const url = "../srcs/modules/ajax_quest.php?query=" + searchQuery;
+		request.open('GET', url);
+		request.setRequestHeader('Content-Type', 'application/json');
+		request.addEventListener("readystatechange", () => 
+		{
+			if (request.readyState === 4 && request.status === 200)
+			{
+				if (request.response != 0)
+				{
+					result.style.visibility = 'visible';
+					var res = JSON.parse(request.response);
+					if (res == res_tpm)
+						return ;
+					var res_tpm = res;
+					res.forEach(elem => drawResults(elem));
+					return ;
+				}
+			}
+			result.style.visibility = 'hidden';
+			clearResults();
+		});
+		request.send();
+	}
+	function drawResults(elem)
+	{
+		var block = document.createElement("div");
+		block.className = "results";
+		var preview = document.createElement("img");
+		var title = document.createElement("div");
+		title.className = "search_title";
+		var info = document.createElement("div");
+		info.className = "search_info";
+		var price = document.createElement("div");
+		price.className = "search_price";
+		preview.src="/srcs/images/" + elem.id + "/preview";
+		block.appendChild(preview);
+		title.textContent = elem.title;
+		block.appendChild(title);
+		info.textContent = elem.country + " " + elem.release + "г " + elem.rate + "+ ";
+		block.appendChild(info);
+		price.textContent = elem.price + "р";
+		block.appendChild(price);
+		result.appendChild(block);
+	}
+	function clearResults()
+	{
+		result.innerHTML = '';
 	}
 </script>
 </body>

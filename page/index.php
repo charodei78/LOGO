@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="/page/page_style.css">
 	<meta charset="utf-8">
@@ -54,22 +55,18 @@
 	<title><?php echo $name; ?></title>
 </head>
 <body>
-	<div id="search_wrapper">
-			  <?php include "../srcs/modules/search.html" ?>
-	</div>
+	
 	<img id="poster" src="../srcs/images/<?php echo $id; ?>/poster">
 	<!-- <img id="shadow" src="../srcs/ico/shadow.png"> -->
 	<div id="shadow"></div>
 	<div id="header_wrapper">
-		<div id="header">
-			<div id="logo"><a href="/">Logo</a></div>
-			<div id="menu">
-			  	<ul>
-					<li><a href="#">новинки</a></li>
-					<li><a href="#">жанры</a></li>
-					<li><a href="#">рекомендуем</a></li>
-				</ul>
-			</div>
+		<div id="logo"><a href="/">Logo</a></div>
+		<div id="menu">
+		  	<ul>
+				<li><a href="#">новинки</a></li>
+				<li><a href="#">жанры</a></li>
+				<li><a href="#">рекомендуем</a></li>
+			</ul>
 		</div>
 	</div>
 	<div id="name">
@@ -92,7 +89,7 @@
 	</div>
 <div class="anchor"  id="gallery"></div>
 	<div class="content" >
-		<iframe width="100%" height="50%" src="<?php echo $trailer ?>" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br>
+		<iframe width="97%" height="50%" src="<?php echo $trailer ?>" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br>
 		<div id="galleryImg">
 			<div class="galleryImg" style="background-image: url(../srcs/images/<?php echo $id; ?>/img1)"></div>
 			<div class="galleryImg" style="background-image: url(../srcs/images/<?php echo $id; ?>/img2)"></div>
@@ -118,6 +115,9 @@
 				<?php foreach ($genre as $value) { echo trim($value['name'])."<br>";}?>
 			</div>
 		</div>
+	</div>
+	<div id="search_wrapper">
+			  <?php include "../srcs/modules/search.html" ?>
 	</div>
 	<script type="text/javascript">
 

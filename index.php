@@ -42,8 +42,8 @@
 			<div class="sidebar"><img onclick="location.href = '/?category=2'" src="srcs/ico/films.png"></a></div>
 			<div class="sidebar"><img onclick="location.href = '/?category=3'" src="srcs/ico/serials.png"></a></div>
 			<div class="sidebar"><img onclick="location.href = '/?category=1'" src="srcs/ico/new.png"></a></div>
-			<div class="sidebar" onclick="filter_menu.style.visibility = 'hidden'; category_menu.style.visibility == 'hidden' ? category_menu.style.visibility = 'visible' : category_menu.style.visibility = 'hidden'"><img src="srcs/ico/categories.png"></div>
-			<div class="sidebar" onclick="category_menu.style.visibility = 'hidden';filter_menu.style.visibility == 'hidden' ? filter_menu.style.visibility = 'visible' : filter_menu.style.visibility = 'hidden'"><img src="srcs/ico/filter.png"></div>
+			<div class="sidebar" onclick="filter_menu.style.visibility = 'hidden'; result.style.visibility = 'hidden'; category_menu.style.visibility == 'hidden' ? category_menu.style.visibility = 'visible' : category_menu.style.visibility = 'hidden'"><img src="srcs/ico/categories.png"></div>
+			<div class="sidebar" onclick="category_menu.style.visibility = 'hidden';result.style.visibility = 'hidden';filter_menu.style.visibility == 'hidden' ? filter_menu.style.visibility = 'visible' : filter_menu.style.visibility = 'hidden'"><img src="srcs/ico/filter.png"></div>
 		</div>
 	</div>
 	<div id="content_wrapper">
@@ -294,6 +294,13 @@
 		var genre = <?php echo $genre; ?>;
 		var category = <?php echo $category; ?>;
 		var selectors = document.getElementsByTagName("select");
+		var search_field = document.getElementById('search_field');
+
+		search_field.onclick = function()
+		{
+			category_menu.style.visibility = 'hidden';
+			filter_menu.style.visibility = 'hidden';
+		}
 
 		for (var i = 0; i < selectors.length; i++)
 		{
