@@ -5,7 +5,7 @@
 		<div id="result" style="visibility: hidden">
 		</div>
 	</div>
-	<form id="search_form" onreset="reset_search.hidden = true">
+	<form id="search_form" onreset="reset_search.hidden = true; ;result.style.visibility = 'hidden';">
 		<input type="text" autocomplete="off" name="search_field" onkeyup="hideCross();getSearchResult(this.value)" placeholder="Поиск" id="search_field">
 		<div id="search_elem">
 			<button type="button" onclick="getSearchResult(search_field.value)" id="search_button"><img src="/srcs/ico/search.gif"></button>
