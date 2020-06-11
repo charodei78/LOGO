@@ -54,7 +54,7 @@
 	flex-direction: column;
 	border-radius: 20px;
 	width: inherit;
-	width: 30vw;
+	width: inherit;
 	max-height: 55vh;
 	overflow-y: auto;
 	padding: 10px;

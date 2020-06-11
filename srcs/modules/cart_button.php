@@ -4,7 +4,7 @@
 		cursor: pointer;
 		height: 100%;
 	}
-	#cart_button div
+	#cart_count
 	{
 		color: black;
 		position: absolute;
@@ -13,7 +13,11 @@
 		height: 45%;
 		width: 18%;
 		right: 0;
-		top: 7%;
+	}
+	#cart_button
+	{
+		display: flex;
+		justify-content: space-between;
 	}
 	#cart
 	{
@@ -29,12 +33,18 @@
 		border: none;
 		outline: none;
 	}
+	#cart_count
+	{
+		position: absolute;
+		top: 4px;
+		left: 132.5px;
+	}
 </style>
 <!-- Чтобы работало укажи высоту и позицию #cart_button -->
 <iframe scrolling="no"  id="cart" src="/srcs/modules/cart.php" width="448" height="10" align="center">
 		Ваш браузер не поддерживает плавающие фреймы! Используйте актуальную версию браузера!
 </iframe>
-<div id="cart_button" onclick="showCart()"><img src="/srcs/ico/library.png"><div id="cart_count">0</div></div>
+<div id="cart_button" onclick="showCart()"><div style="position: relative;"><div id="cart_count">0</div></div><img src="/srcs/ico/library.png"></div>
 
 <script type="text/javascript">
 
@@ -67,7 +77,7 @@
 		}
 		cart.src = cart.src;
 		cart.style.visibility = 'visible';
-		setTimeout('cart.height = parseInt(window.frames[0].height) + 45;cart.style.opacity = 1; cart.style.margin = "calc((100vh - " + window.frames[0].height + ") / 2) 36vw";', 500); 				
+		setTimeout('cart.height = parseInt(window.frames[0].height) + 45;cart.style.opacity = 1; cart.style.margin = "calc((100vh - " + window.frames[0].height + ") / 2) calc(50vw - 300px)";', 500); 				
 	}
 
 	function closeCart()

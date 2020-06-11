@@ -38,6 +38,7 @@
 	$genre_list = $stmt->fetchAll();
 	?>
 	<div id="sidebar_background">
+		<div id="logo"><a href="/">Logo</a></div>
 		<div id="sidebar_wrapper">
 			<div class="sidebar"><img onclick="location.href = '/?category=2'" src="srcs/ico/films.png"></a></div>
 			<div class="sidebar"><img onclick="location.href = '/?category=3'" src="srcs/ico/serials.png"></a></div>
@@ -174,6 +175,7 @@
 		$connection = null;
 		?>
 	</div>
+	<div id="header_shadow"></div>
 	<div id="search_wrapper">
 		<?php include "srcs/modules/search.html"; ?>
 	</div>

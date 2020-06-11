@@ -1,12 +1,12 @@
 <body>
 <link rel="stylesheet" type="text/css" href="/srcs/modules/search.css">
 <div id="search">
-	<div style="position: relative; height: 0; width: 0;">
+	<div style="position: relative; height: 0; width: inherit;">
 		<div id="result" style="visibility: hidden">
 		</div>
 	</div>
 	<form id="search_form" onreset="reset_search.hidden = true">
-		<input type="text" name="search_field" onkeyup="hideCross();getSearchResult(this.value)" placeholder="Поиск" id="search_field">
+		<input type="text" autocomplete="off" name="search_field" onkeyup="hideCross();getSearchResult(this.value)" placeholder="Поиск" id="search_field">
 		<div id="search_elem">
 			<button type="button" onclick="getSearchResult(search_field.value)" id="search_button"><img src="/srcs/ico/search.gif"></button>
 			<button type="reset" id="reset_search" onclick="clearResults()" hidden><img  src="/srcs/ico/cross.gif"></button>

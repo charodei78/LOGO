@@ -2,7 +2,6 @@
 <html lang="en" dir="ltr">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="/page/page_style.css">
 	<meta charset="utf-8">
 	<?php
@@ -63,9 +62,9 @@
 		<div id="logo"><a href="/">Logo</a></div>
 		<div id="menu">
 		  	<ul>
-				<li><a href="#">новинки</a></li>
-				<li><a href="#">жанры</a></li>
-				<li><a href="#">рекомендуем</a></li>
+				<li><a href="/?category=2">фильмы</a></li>
+				<li><a href="/?category=3">сериалы</a></li>
+				<li><a href="/?category=1">новинки</a></li>
 			</ul>
 		</div>
 	</div>
@@ -76,15 +75,15 @@
 	</div>
 	</div>
 	<div id="navibar">
-		<div><a class="navibar" href="#discription"><img src="../srcs/ico/discription.png"></a></div>
-		<div><a class="navibar" href="#gallery"><img src="../srcs/ico/gallery.png"></a></div>
-		<div><a class="navibar" href="#info"><img src="../srcs/ico/info.png"></a></div>
+		<div><a class="navibar" type="button" onclick="selectTab( contentList[0], this)"><img src="../srcs/ico/discription.png"></a></div>
+		<div><a class="navibar" type="button" onclick="selectTab( contentList[1], this)"><img src="../srcs/ico/gallery.png"></a></div>
+		<div><a class="navibar" type="button" onclick="selectTab( contentList[2], this)"><img src="../srcs/ico/info.png"></a></div>
 		<div id="price"><button id="price_button" onclick="addToCart(<?php echo $id; ?>)"><?php echo $price; ?> ₽</button></div> 
 	</div>
 	<br>
 <div class="anchor" id="discription"></div>
 	<div class="space"></div>
-	<div class="content" style="margin-top: 250px;">
+	<div class="content">
 		<span style="vertical-align: middle;"><?php  echo $discription; ?></span>
 	</div>
 <div class="anchor"  id="gallery"></div>
@@ -101,10 +100,6 @@
 	<br>
 	<div class="content" id="info_block">
 		<div>
-			<p>В ролях </p><br>
-			<?php foreach ($role as $value) { echo trim($value)."<br>";}?>
-		</div>
-		<div id='right_info_block'>
 			<div>
 				<p>Режисеры</p> <br>
 				<?php foreach ($director as $value) { echo trim($value)."<br>";}?>
@@ -115,21 +110,29 @@
 				<?php foreach ($genre as $value) { echo trim($value['name'])."<br>";}?>
 			</div>
 		</div>
+		<div id='right_info_block'>
+			<p>В ролях </p><br>
+			<?php foreach ($role as $value) { echo trim($value)."<br>";}?>
+		</div>
 	</div>
 	<div id="search_wrapper">
-			  <?php include "../srcs/modules/search.html" ?>
+		<?php include "../srcs/modules/search.html" ?>
 	</div>
 	<script type="text/javascript">
 
 		var price_tmp = price_button.innerHTML;
 		checkCart(<?php echo $id; ?>);
+		var contentList = Array.from(document.getElementsByClassName("content"));
+		var navibarList = Array.from(document.getElementsByClassName("navibar"));
+		selectTab(contentList[0], navibarList[0]);
 
-		$("body").on('click', '[href*="#"]', function(e){
-			var fixed_offset = 110;
-			$('html,body').stop().animate({ scrollTop: $(this.hash).offset().top - fixed_offset }, 800);
-			e.preventDefault();
-		}); // TODO: пеерписать скрипт
-
+		function selectTab(elem, button)
+		{
+			contentList.forEach(elem => elem.style.visibility = "hidden");
+			elem.style.visibility = "visible";
+			navibarList.forEach(elem => elem.style.border = "none");
+			button.style.borderLeft = "2px solid yellow";
+		}
 		function getCookie(name) 
 		{
 		  var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
