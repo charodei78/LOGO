@@ -81,12 +81,10 @@
 		<div id="price"><button id="price_button" onclick="addToCart(<?php echo $id; ?>)"><?php echo $price; ?> ₽</button></div> 
 	</div>
 	<br>
-<div class="anchor" id="discription"></div>
 	<div class="space"></div>
 	<div class="content">
 		<span style="vertical-align: middle;"><?php  echo $discription; ?></span>
 	</div>
-<div class="anchor"  id="gallery"></div>
 	<div class="content" >
 		<iframe width="97%" height="50%" src="<?php echo $trailer ?>" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br>
 		<div id="galleryImg">
@@ -95,7 +93,6 @@
 			<div class="galleryImg" style="background-image: url(../srcs/images/<?php echo $id; ?>/img3)"></div>
 		</div>
 	</div>
-<div class="anchor"  id="info"></div>
 	<br>
 	<br>
 	<div class="content" id="info_block">

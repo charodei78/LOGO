@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		body
+		{
+			font-family: 'MyriadProRegular';
+			background-color: rgba(0,0,0, 0);
+			color: white;
+			border-radius: 10px;
+		}
+		@font-face 
+		{ 
+		    font-family: "MyriadProRegular";
+			src: url("/srcs/fonts/MyriadProRegular.ttf");
+		}
+		button
+		{
+			margin-top: 100px;
+			border-radius: 30px;
+			border: none;
+			font-size: 140%;
+			padding: 0 10px;
+			box-shadow: inset 0 0 3px 0 gray;
+			background-color: #c9914d;
+			color: white;
+			outline: none;
+			height: 40px;
+			width: 100px;
+		}
+		button:hover
+		{
+			box-shadow: inset 0 0 3px 1px black;
+		}
+	</style>
+</head>
+<body style="">
+	<div style="height: 68vh; padding-top: 30%; width: 100%;background-color: rgba(38,38,38, 0.9);border-radius: 10px;">
+		<div style="margin: 0 18%; font-size: 180%; text-align: center;">
+			Заказ успешно оформлен!
+		</div>
+		<center><button onclick="location.href = 'cart.php'">OK</button></center>
+	</div>
+</body>
+</html>

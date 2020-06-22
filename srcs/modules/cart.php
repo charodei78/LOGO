@@ -14,7 +14,15 @@ if ($id)
 			PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
 			PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 			);
-	$connection = new PDO('mysql:host=localhost;dbname=films_index;charset=utf8', 'root', 'root', $options);
+	try 
+	{
+		$connection = new PDO('mysql:host=localhost;dbname=films_index;charset=utf8', 'root', 'root', $options);
+	}
+	catch (Exception $e) 
+	{
+	   exit('<script type="text/javascript">alert("Подключение к базе данных не удалось, попробуйте перезагрузить страницу: ' . $e->getMessage().'");
+		location.href=location.href;</script>');
+	}
 	$stmt = $connection->query("SELECT film.id, `title`, price FROM film WHERE id in (".implode(',' , $id).") ORDER BY title");
 	$product_list = $stmt->fetchAll();
 	$connection = null;
@@ -31,7 +39,7 @@ else
 		</table>
 		<div id="product_list">
 			<?php  
-			if ($product_list)
+			if ($product_list && $product_list != array())
 			{
 				echo "<table cellspacing='0'>";
 				foreach ($product_list as $row) {
@@ -58,7 +66,12 @@ else
 				echo "<p style='font-size: 150%; margin:0; margin-left: 15px;'>Товары отсутствуют</p>";
 			?>
 		</div>
-		<button id="buy_button">Купить</button>
+		<div id="client_info">
+			<input type="text" placeholder="Имя" name="client_name"><br>
+			<input type="text" placeholder="Номер (начиная с 8)" name="phone"><br>
+			<textarea placeholder="Адрес доставки" name="address"></textarea>
+		</div>
+		<button id="buy_button" formmethod="post" formaction="checkout.php">Купить</button>
 	</form>
 </div>
 <script type="text/javascript">

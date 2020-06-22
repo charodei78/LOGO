@@ -67,6 +67,32 @@ INSERT INTO `category_list` VALUES (5,1),(6,1),(10,1),(11,1),(12,1),(13,1),(1,2)
 UNLOCK TABLES;
 
 --
+-- Table structure for table `client`
+--
+
+DROP TABLE IF EXISTS `client`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `client` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `client_name` varchar(128) NOT NULL,
+  `address` longtext NOT NULL,
+  `phone` bigint NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `client`
+--
+
+LOCK TABLES `client` WRITE;
+/*!40000 ALTER TABLE `client` DISABLE KEYS */;
+INSERT INTO `client` VALUES (1,'Константин','Братьев Кашириных 101а, 74',89517958956),(2,'Константин','ПЦпцупру',89517958956);
+/*!40000 ALTER TABLE `client` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `country`
 --
 
@@ -177,6 +203,58 @@ LOCK TABLES `genre_list` WRITE;
 INSERT INTO `genre_list` VALUES (5,1),(10,1),(11,1),(2,5),(6,5),(9,5),(2,7),(8,7),(9,8),(1,11),(6,11),(7,11),(8,11),(9,11),(12,11),(8,12),(8,13),(10,13),(11,13),(12,16),(8,17),(6,20),(10,20),(11,20),(10,21),(5,22),(11,22),(5,23),(10,23),(9,26),(12,26),(6,28),(9,28),(10,28);
 /*!40000 ALTER TABLE `genre_list` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `order`
+--
+
+DROP TABLE IF EXISTS `order`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `order` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `client_id` int NOT NULL,
+  PRIMARY KEY (`id`,`client_id`),
+  KEY `fk_client_id_idx` (`client_id`),
+  CONSTRAINT `fk_client_id` FOREIGN KEY (`client_id`) REFERENCES `client` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order`
+--
+
+LOCK TABLES `order` WRITE;
+/*!40000 ALTER TABLE `order` DISABLE KEYS */;
+INSERT INTO `order` VALUES (1,1),(2,2);
+/*!40000 ALTER TABLE `order` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `order_products`
+--
+
+DROP TABLE IF EXISTS `order_products`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `order_products` (
+  `order_id` int NOT NULL AUTO_INCREMENT,
+  `product_id` int NOT NULL,
+  PRIMARY KEY (`order_id`,`product_id`),
+  KEY `fk_product_id_idx` (`product_id`),
+  CONSTRAINT `fk_product_id` FOREIGN KEY (`product_id`) REFERENCES `film` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order_products`
+--
+
+LOCK TABLES `order_products` WRITE;
+/*!40000 ALTER TABLE `order_products` DISABLE KEYS */;
+INSERT INTO `order_products` VALUES (1,8),(1,10),(2,10),(2,11);
+/*!40000 ALTER TABLE `order_products` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -187,4 +265,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-10 18:32:06
+-- Dump completed on 2020-06-17 18:54:25

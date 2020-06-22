@@ -96,21 +96,31 @@
 		}
 		
 		if ($price_min)
-			$prequery = $prequery." AND `price` >".$price_min;
+			$prequery = $prequery." AND `price` >=".$price_min;
 		if ($price_max)
-			$prequery = $prequery." AND `price` <".$price_max;
+		{
+			if ($price_max >= $price_min)
+				$prequery = $prequery." AND `price` <=".$price_max;
+			else
+				$prequery = $prequery." OR `price` <=".$price_max;
+		}
 		if ($release_min)
-			$prequery = $prequery." AND `release` >".$release_min;
+			$prequery = $prequery." AND `release` >=".$release_min;
 		if ($release_max)
-			$prequery = $prequery." AND `release` <".$release_max;
+		{
+			if ($release_max >= $release_min)
+				$prequery = $prequery." AND `release` <=".$release_max;
+			else
+				$prequery = $prequery." OR `release` <=".$release_max;
+		}
 		if ($country)
 			$prequery = $prequery." AND country_id = ".$country;
 		if ($rate)
 			$prequery = $prequery." AND rate >= ".$rate;
 		if ($category && !$genre)
-			$prequery = $prequery." ORDER BY genre.id";
+			$prequery = $prequery." ORDER BY genre.id, rand()";
 		elseif (!$genre) 
-			$prequery = $prequery." ORDER BY category.id";
+			$prequery = $prequery." ORDER BY category.id, rand()";
 		$stmt = $connection->query($prequery);
 		if (!$stmt)
 			exit('<script type="text/javascript">alert("Не удалось загрузить информацию о товарах, попробуйте перезагрузить страницу: ");
@@ -122,7 +132,7 @@
 		if ($data == array())
 		{
 			echo "<div class='content' style='flex-wrap: wrap; height: auto;justify-content: space-around;'>
-				<h1 style='text-transform: none'>Ничего не найдено</h1>";
+				<h1 style='text-transform: none; margin-top: -20px'>Ничего не найдено</h1>";
 		}
 		elseif (!$genre)
 		{
@@ -146,7 +156,7 @@
 					</div>';
 				if ($category_tmp != $data[$i + 1]["category"])
 				{
-					echo '<button onclick="scrollSide('.$line_tmp.', 0)" style="left: -1%"><</button> <button onclick="scrollSide('.$line_tmp.', true)" style="right: -2%">></button>
+					echo '<button onclick="scrollSide('.$line_tmp.', 0)" style="left: -1%"><center style="padding-left: 5px;"><div style="transform: rotate(-135deg);padding-: 5px;"></div></center></button> <button onclick="scrollSide('.$line_tmp.', true)" style="right: -2%"><center style="padding-right: 5px;"><div></div></center></button>
 						</div>';
 					$line_tmp++;
 
@@ -361,9 +371,9 @@
 		function scrollSide (contentId, side)
 		{
 			if (side)
-				contentList[contentId].scrollLeft += 350;
+				contentList[contentId].scrollLeft += contentList[contentId].offsetWidth - (contentList[contentId].offsetWidth % 355) + 20;
 			else
-				contentList[contentId].scrollLeft -= 350;
+				contentList[contentId].scrollLeft -= contentList[contentId].offsetWidth - (contentList[contentId].offsetWidth % 355) + 20;
 		}
 	</script>
 </body>
