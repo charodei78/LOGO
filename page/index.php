@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=0.5">
 	<link rel="stylesheet" type="text/css" href="/page/page_style.css">
 	<meta charset="utf-8">
 	<?php

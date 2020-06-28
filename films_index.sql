@@ -75,11 +75,11 @@ DROP TABLE IF EXISTS `client`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `client` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `client_name` varchar(128) NOT NULL,
+  `name` varchar(128) NOT NULL,
   `address` longtext NOT NULL,
   `phone` bigint NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -88,7 +88,7 @@ CREATE TABLE `client` (
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
-INSERT INTO `client` VALUES (1,'Константин','Братьев Кашириных 101а, 74',89517958956),(2,'Константин','ПЦпцупру',89517958956);
+INSERT INTO `client` VALUES (3,'Константин','Братьев Кашириных 101а 74',89517958956),(4,'Дрон','Суворова 2',8067240670267),(5,'Константин','эупдоылзжмроузжоп упурпруы ау',8952663623677),(6,'Тест','АЦУпупу пу пуып п',851256526263),(7,'Тест','ЛОДРАЛДГПрууорпу лпупуыплу у',940219572509),(8,'Константин','АПупупуцпцуп уцп цуп у рппуру',89512514652),(9,'Константин','Братьев Брежневый 105',89517958956);
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,10 +214,14 @@ DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
   `id` int NOT NULL AUTO_INCREMENT,
   `client_id` int NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status_id` int NOT NULL,
   PRIMARY KEY (`id`,`client_id`),
   KEY `fk_client_id_idx` (`client_id`),
-  CONSTRAINT `fk_client_id` FOREIGN KEY (`client_id`) REFERENCES `client` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  KEY `fk_status_id_idx` (`status_id`),
+  CONSTRAINT `fk_client_id` FOREIGN KEY (`client_id`) REFERENCES `client` (`id`),
+  CONSTRAINT `fk_status_id` FOREIGN KEY (`status_id`) REFERENCES `status` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -226,7 +230,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES (1,1),(2,2);
+INSERT INTO `order` VALUES (3,3,'2020-06-25 21:53:12',1),(4,4,'2020-06-25 21:53:49',1),(5,5,'2020-06-25 22:27:11',1),(6,6,'2020-06-25 22:28:42',1),(7,7,'2020-06-25 22:29:18',1),(8,8,'2020-06-25 22:30:16',1),(9,9,'2020-06-25 22:31:07',1);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,8 +246,9 @@ CREATE TABLE `order_products` (
   `product_id` int NOT NULL,
   PRIMARY KEY (`order_id`,`product_id`),
   KEY `fk_product_id_idx` (`product_id`),
+  CONSTRAINT `fk_order_id` FOREIGN KEY (`order_id`) REFERENCES `order` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_product_id` FOREIGN KEY (`product_id`) REFERENCES `film` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -252,8 +257,32 @@ CREATE TABLE `order_products` (
 
 LOCK TABLES `order_products` WRITE;
 /*!40000 ALTER TABLE `order_products` DISABLE KEYS */;
-INSERT INTO `order_products` VALUES (1,8),(1,10),(2,10),(2,11);
+INSERT INTO `order_products` VALUES (3,2),(5,2),(6,2),(7,2),(8,2),(3,5),(4,5),(3,9),(4,9),(5,9),(6,9),(7,9),(8,9),(9,9),(9,10),(4,13),(5,13),(6,13),(7,13),(8,13);
 /*!40000 ALTER TABLE `order_products` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `status`
+--
+
+DROP TABLE IF EXISTS `status`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `status` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `status`
+--
+
+LOCK TABLES `status` WRITE;
+/*!40000 ALTER TABLE `status` DISABLE KEYS */;
+INSERT INTO `status` VALUES (1,'Ожидает оплаты'),(2,'В обработке'),(3,'Принят к исполнению'),(4,'Отправлен'),(5,'Доставлен'),(6,'Завершен');
+/*!40000 ALTER TABLE `status` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -265,4 +294,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-17 18:54:25
+-- Dump completed on 2020-06-28  1:03:21

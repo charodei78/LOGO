@@ -96,6 +96,7 @@ input[type~="text"], input[type~="password"], input[type~="select"], select
 
 .sidebar 
 {
+    cursor: pointer;
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
@@ -141,8 +142,9 @@ input[type~="text"], input[type~="password"], input[type~="select"], select
 	height: 70vh;
 	min-height: 300px;
 	font-size: 125%;
-	width: 420px;	
+	width: 420px;
 }
+
 
 @media screen and (max-height: 500px)
 {
@@ -258,10 +260,21 @@ input[type~="text"], input[type~="password"], input[type~="select"], select
 	top: 5px;
 }
 
-@media screen and (max-width: 680px)
+
+@media screen and (max-width: 700px)
 {
-	#cart_button { left: 480px; }
+    #filter_menu {width: 50%;}
+    #filter_menu input {width: 50%;}  
+    #category_menu{width: 60%;}
+	#cart_button { left: 450px; }
 }
+
+
+@media screen and (max-width: 580px)
+{
+	#cart_button { left: 380px; }
+}
+
 
 #content_wrapper
 {
@@ -312,6 +325,7 @@ input[type~="text"], input[type~="password"], input[type~="select"], select
 
 .preview
 {
+    cursor: pointer;
 	flex-shrink: 0;
 	height: 92%;
 	/*object-fit: contain;*/
@@ -399,6 +413,7 @@ input[type~="text"], input[type~="password"], input[type~="select"], select
 
 .content button
 {
+    cursor: pointer;
 	position: absolute;
 	height: 50px;
 	width: 50px;

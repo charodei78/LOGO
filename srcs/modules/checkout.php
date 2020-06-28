@@ -1,11 +1,11 @@
 <?php 
 	$id = array_map(intval, $_POST['id']);
-	$client_name = htmlspecialchars($_POST['client_name']);
+	$name = htmlspecialchars($_POST['client_name']);
 	$address = htmlspecialchars($_POST['address']);
 	$phone = intval($_POST['phone']);
-	if (!$id[0] || !$client_name || !$address || !$phone)
+	if (!$id[0] || !$name || !$address || !$phone)
 	{
-		exit("<script type='text/javascript'>alert('Ошибка данных! Повторите ввод.".$id[0].$client_name.$address.$phone."');
+		exit("<script type='text/javascript'>alert('Ошибка данных! Повторите ввод.".$id[0].$name.$address.$phone."');
 			location.href='cart.php';</script>");
 	}
 	$options = array(
@@ -18,15 +18,17 @@
 		exit('<script type="text/javascript">alert("Подключение к базе данных не удалось, попробуйте перезагрузить страницу: ' . $e->getMessage().'");
 			location.href=location.href;</script>');
 	}
-	$query = $connection->prepare('INSERT INTO client (client_name, address, phone) VALUES (:client_name, :address, :phone)');
+	$query = $connection->prepare('INSERT INTO client (name, address, phone) VALUES (:name, :address, :phone)');
 	$query->execute([
-		':client_name' => $client_name, 
+		':name' => $name, 
 		':address' => $address, 
 		':phone' => $phone]);
 	$client_id = $connection->lastInsertId();
-	$query = $connection->prepare('INSERT INTO `order` (client_id) VALUES (:client_id)');
+	$query = $connection->prepare('INSERT INTO `order` (client_id, status_id, `date`) VALUES (:client_id, :status_id, NOW())');
 	$query->execute([
-		':client_id' => $client_id]);
+		':client_id' => $client_id,
+		':status_id' => 1,
+	]);
 	$order_id = $connection->lastInsertId();
 	insert_list($id, $order_id, $connection, "order_products", "order_id", 'product_id');
 	function insert_list($list, $id, $connect, $table_name, $fld_name_id, $fld_name_value)

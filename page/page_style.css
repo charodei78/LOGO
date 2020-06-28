@@ -10,7 +10,6 @@ body
 	color: #4a8eb8;
 	background-color: black;
 	margin: 0;
-	overflow-y: hidden;
 }
 
 ::-webkit-scrollbar
@@ -94,9 +93,11 @@ body
 	height: 40px;
 }
 
-@media screen and (max-width: 1200px)
+@media screen and (max-width: 830px)
 {
-	#search_wrapper{margin-left: 830px; right: auto}
+    
+	#search_wrapper{ margin-top: 30px;}
+
 }
 
 #logo 
@@ -224,7 +225,7 @@ a{text-decoration:none;}
 
 .content
 {
-	position: absolute;
+	position: fixed;
 	margin:200px 0 300px calc(200px + (40px - 1vw));
 	min-width: 300px;
 	width: 40%;
@@ -235,19 +236,36 @@ a{text-decoration:none;}
 	/*border: 1px solid white;*/
 }
 
+@media screen and (max-width: 1300px)
+{
+	#result{margin-left: -50px}
+}
 @media screen and (max-height: 800px)
 {
-	.content {height: 60vh;}
+	#navibar, .content {height: 65vh;}
 }
 
 @media screen and (max-height: 700px)
 {
-	.content {height: 50vh;}
+	#navibar, .content {height: 57vh;}
 }
+
+@media screen and (max-height: 600px)
+{
+	#navibar, .content {height: 45vh;}
+}
+
+@media screen and (max-height: 400px)
+{
+	#navibar, .content {height: 28vh;}
+}
+
 @media screen and (max-width: 1000px)
 {
+	#result{margin-left: -130px}
 	.content {width: 50%}
 }
+
 
 #info_block
 {
@@ -275,9 +293,10 @@ a{text-decoration:none;}
 	flex-shrink: 0;
 	display: flex;
 	align-items: center;
-	height: 23%;
-	width: 100%;
-	padding-right: 0px;
+	height: 110px;
+	width: 95%;
+	margin: 0 auto;
+	padding: 5px;
 	overflow-x: auto;
 }
 
@@ -285,7 +304,7 @@ a{text-decoration:none;}
 {
 	overflow: hidden;
 	height: 100%;
-	margin-left: 8px;
+	margin: 0 auto;
 	width: 32%;
 	min-width: 150px;
 	border-radius: 5px;
@@ -296,7 +315,8 @@ a{text-decoration:none;}
 
 iframe
 {
-	margin: 10% 0 0 10px; 
+	height: 250px;
+	margin: 0 0 0 10px; 
 	object-fit: contain;
 	box-shadow: 0 0 10px 2px gray;
 	border-radius: 10px;
